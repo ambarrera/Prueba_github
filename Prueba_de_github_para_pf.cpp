@@ -5,7 +5,12 @@
 
 int main()
 {
+//<<<<<<< master
     std::cout << "Hello AMara\n";
+
+    std::cout << "Hello World!\n";
+    std::cout <<"holaaaa \n";
+//>>>>>>> master
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
