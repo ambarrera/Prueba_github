@@ -9,7 +9,7 @@ int main()
     std::cout << "Hola Amara\n";
     std::cout << "HOLA\n";
     std::cout << "Hola Prima\n";
-    std::cout <<"------_________------";
+    std::cout <<"------_________------"<<" <[:{D ";
 	std::cout <<"Si funciona :')";
     
 }
