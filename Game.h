@@ -2,10 +2,10 @@
 
 class Game {
 public:
-    //Constructor and Destructor(?)
+    //Constructor
     Game(int screenWidth, int screenHeight);
 
-    //Functions
+    //Funciones
     void setUpScreen();
 
     void handleInput();
@@ -16,12 +16,22 @@ public:
     void draw(int x, int y, char character);
     bool keyPressed(int key);
 
+    //Enum del estado del juego
+    enum GameStates {
+        MAIN_MENU,
+        EXPLORATION,
+        COMBAT,
+        GAME_OVER
+    };
+
+    GameStates game_state;
+
     //Variables
     bool running;
     int width;
     int height;
 
-    //Private variables to set up the screen
+    //Variables privadas para configurar la pantalla
     TCHAR* screen;
     HANDLE console;
     DWORD dwBytesWritten;

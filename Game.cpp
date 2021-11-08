@@ -7,7 +7,9 @@ Game::Game(int screenWidth, int screenHeight) {
     running = true;
     height = screenHeight;
     width = screenWidth;
-    //Setting up the screen (private)
+    game_state = MAIN_MENU;
+    
+    //Configuración de pantalla (private)
     setUpScreen();
 }
 

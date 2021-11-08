@@ -35,5 +35,5 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
             draw(x, y, ' ');
         }
     }
-    draw(30, 0, '@');
+    draw(0, 0, '@');
 }
