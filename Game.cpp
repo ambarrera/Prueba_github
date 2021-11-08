@@ -26,6 +26,7 @@ void Game::renderScreen() {
 bool Game::keyPressed(int key) {
     if (GetAsyncKeyState(key) & 0x8000)
         return true;
+    return false;
 }
 
 void Game::draw(int x, int y, char character) {

@@ -16,7 +16,7 @@ int main() {
 
 void Game::handleInput() {
     //Aqui va el input de player
-    if (keyPressed('q')) {
+    if (keyPressed('Q')) {
         running = false;
     }
 }
@@ -28,7 +28,12 @@ void Game::updateAllObjects() {
     char myChar = '@';
 }
 
-void Game::updateScreen() {
-    //Aquí se modifica el array que se imprimirá
+void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
+    //Pantalla en blanco (falta implementar ui)
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            draw(x, y, ' ');
+        }
+    }
     draw(30, 0, '@');
 }
