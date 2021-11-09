@@ -37,8 +37,8 @@ void Game::draw(int x, int y, char character) {
 
 void Game::draw(int x, int y, char* myString) {
     for (int i = 0; i < height * width; i++) {
-        if (myString[i] == '\0')
+        if (*(myString + i) == '\0')
             break;
-        screen[y * width + x + i] = myString[i];
+        screen[y * width + x + i] = *(myString + i);
     }
 }
