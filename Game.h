@@ -14,6 +14,7 @@ public:
     void renderScreen();
 
     void draw(int x, int y, char character);
+    void draw(int x, int y, char* myString);
     bool keyPressed(int key);
 
     //Enum del estado del juego

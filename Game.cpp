@@ -8,7 +8,7 @@ Game::Game(int screenWidth, int screenHeight) {
     height = screenHeight;
     width = screenWidth;
     game_state = MAIN_MENU;
-    
+
     //Configuración de pantalla (private)
     setUpScreen();
 }
@@ -33,4 +33,12 @@ bool Game::keyPressed(int key) {
 
 void Game::draw(int x, int y, char character) {
     screen[y * width + x] = character;
+}
+
+void Game::draw(int x, int y, char* myString) {
+    for (int i = 0; i < height * width; i++) {
+        if (myString[i] == '\0')
+            break;
+        screen[y * width + x + i] = myString[i];
+    }
 }

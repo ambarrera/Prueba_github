@@ -1,12 +1,9 @@
-#include <Windows.h>
-
 class Player{
-	
 public:
+	//Constructor
+	Player(int posX, int posY, int HP, int DEF, int ATK, int EXP);
 
-//constructor
-	Player(int posX, int posY, int HP, int DEF, int ATK, int EXP )
-//variables
+	//Variables
 	int hp; 
 	int def;
 	int atk;	
