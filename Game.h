@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include "Player.h"
 
 class Game {
 public:
@@ -26,6 +27,9 @@ public:
     };
 
     GameStates game_state;
+
+    //Objetos y actores del juego;
+    Player player;
 
     //Variables
     bool running;

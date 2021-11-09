@@ -1,13 +1,11 @@
 class Player{
 public:
-	//Constructor
-	Player(int posX, int posY, int HP, int DEF, int ATK, int EXP);
 
 	//Variables
-	int hp; 
-	int def;
-	int atk;	
-	int x;
-	int y;	
-	int exp;
+	int hp = 100; 
+	int def = 20;
+	int atk = 30;
+	int x = 0;
+	int y = 0;	
+	int exp = 0;
 };

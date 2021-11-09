@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Game.h"
-#include "Player.h"
+//#include "Player.h"
 
 using namespace std;
 
@@ -20,8 +20,14 @@ void Game::handleInput() {
     if (keyPressed('Q')) {
         running = false;
     }
-    if (keyPressed('D')) {
+    if (keyPressed('E')) {
         game_state = GAME_OVER;
+    }
+    if (keyPressed('W')) {
+        player.y -= 1;
+    }
+    if (keyPressed('S')) {
+        player.y += 1;
     }
 }
 
@@ -39,6 +45,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
             draw(x, y, ' ');
         }
     }
+    //Prueba de cambio de Game_states
     switch (game_state) {
     case MAIN_MENU:
         draw(0, 0, "Main Menu");
@@ -49,4 +56,6 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
     default:
         break;
     }
+
+    draw(player.x, (player.y) / 200, '@');
 }
