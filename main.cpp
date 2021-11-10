@@ -23,6 +23,9 @@ void Game::handleInput() {
     if (keyPressed('E')) {
         game_state = GAME_OVER;
     }
+    if (keyPressed('R')) {
+        game_state = EXPLORATION;
+    }
     if (keyPressed('W')) {
         player.y -= 1;
     }
@@ -49,6 +52,39 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
     switch (game_state) {
     case MAIN_MENU:
         draw(0, 0, "Main Menu");
+        break;
+    case EXPLORATION:
+        //Cuadrante del mapa
+        draw(5, 1, "_______________________________> MYRKVI R WOODS <_______________________________");
+        for (int i = 0; i < 20; i++) {
+            draw(4, 2 + i, '|');
+            draw(85, 2 + i, '|');
+        }
+        draw(5, 21, "________________________________________________________________________________");
+        draw(44, 1, (char)209);
+        //Cuadrante del texto
+        draw(5, 22, "_________________________________________________________________________________");
+        for (int i = 0; i < 4; i++) {
+            draw(4, 23 + i, '|');
+            draw(85, 23 + i, '|');
+        }
+        draw(3, 27, "_j_______________________________________________________________________________ |");
+        draw(2, 28, "(_________________________________________________________________________________@'");
+        draw(85, 23, ".@");
+        //Cuadrante de los "stats"
+        draw(89, 1, "_STATS_____________________");
+        for (int i = 0; i < 4; i++) {
+            draw(88, 2 + i, '|');
+            draw(116, 2 + i, '|');
+        }
+        draw(88, 6, "|___________________________|");
+        //Cuadrante del "inventory"
+        draw(89, 8, "_INVENTORY_________________");
+        for (int i = 0; i < 12; i++) {
+            draw(88, 9 + i, '|');
+            draw(116, 9 + i, '|');
+        }
+        draw(88, 21, "|___________________________|");
         break;
     case GAME_OVER:
         draw(0, 0, "Game Over");
