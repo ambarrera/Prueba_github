@@ -18,12 +18,17 @@ public:
     void draw(int x, int y, char* myString);
     bool keyPressed(int key);
 
+    void drawMainMenu();
+    void drawMap(int numMap);
+    void drawUI();
+
     //Enum del estado del juego
     enum GameStates {
         MAIN_MENU,
         EXPLORATION,
         COMBAT,
-        GAME_OVER
+        GAME_OVER,
+        CREDITS
     };
 
     GameStates game_state;
@@ -35,6 +40,8 @@ public:
     bool running;
     int width;
     int height;
+
+    int cursorPos;
 
     //Variables privadas para configurar la pantalla
     TCHAR* screen;

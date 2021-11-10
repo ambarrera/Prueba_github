@@ -2,10 +2,19 @@ class Player{
 public:
 
 	//Variables
-	int hp = 100; 
-	int def = 20;
-	int atk = 30;
-	int x = 0;
-	int y = 0;	
-	int exp = 0;
+	int hp; 
+	int def;
+	int atk;
+	int x;
+	int y;	
+	int exp;
+
+	Player() {
+		hp = 100;
+		def = 20;
+		atk = 30;
+		x = 20;
+		y = 2;
+		exp = 0;
+	}
 };
