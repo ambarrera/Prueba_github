@@ -85,7 +85,75 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
             draw(116, 9 + i, '|');
         }
         draw(88, 21, "|___________________________|");
+
+        //MAPA
+        //Pasto
+        for (int i = 0; i < 80; i++) {
+            for (int j = 0; j < 20; j++) {
+                draw(5 + i, 2+j, char(176));
+            }
+        }
+        //Copa de árbol
+        for (int i = 0; i < 80; i=i+3) {
+            draw(6 + i, 2, '^');
+            draw(6 + i, 7, '^');
+            draw(6 + i, 13, '^');
+            draw(6 + i, 18, '^');
+        }
+        //Tronco
+        for (int i = 0; i < 80; i = i + 3) {
+            draw(6 + i, 5, char(186));
+            draw(6 + i, 10, char(186));
+            draw(6 + i, 16, char(186));
+            draw(6 + i, 21, char(186));
+        }
+        //Hoja IZquierda
+        for (int i = 0; i < 80; i = i + 3) {
+            draw(5 + i, 3, char(47));
+            draw(5 + i, 4, char(47));
+            draw(5 + i, 8, char(47));
+            draw(5 + i, 9, char(47));
+            draw(5 + i, 14, char(47));
+            draw(5 + i, 15, char(47));
+            draw(5 + i, 19, char(47));
+            draw(5 + i, 20, char(47));
+        }
+        //Hoja Derecha
+        for (int i = 0; i < 78; i = i + 3) {
+            draw(7 + i, 3, char(92));
+            draw(7 + i, 4, char(92));
+            draw(7 + i, 8, char(92));
+            draw(7 + i, 9, char(92));
+            draw(7 + i, 14, char(92));
+            draw(7 + i, 15, char(92));
+            draw(7 + i, 19, char(92));
+            draw(7 + i, 20, char(92));
+        }
+        //Centro del Arbol
+        for (int i = 0; i < 80; i = i + 3) {
+            draw(6 + i, 3, char(32));
+            draw(6 + i, 4, char(32));
+            draw(6 + i, 8, char(32));
+            draw(6 + i, 9, char(32));
+            draw(6 + i, 14, char(32));
+            draw(6 + i, 15, char(32));
+            draw(6 + i, 19, char(32));
+            draw(6 + i, 20, char(32));
+        }
+        //Camino
+        for (int i = 0; i < 80; i++) {
+            draw(5 + i, 11, char(32));
+            draw(5 + i, 12, char(32));
+        }
+        for (int i = 0; i < 20; i++) {
+            draw(20, 2+i, char(32));
+            draw(21, 2+i, char(32));
+            draw(22, 2 + i, char(32));
+        }
+
+
         break;
+
     case GAME_OVER:
         draw(0, 0, "Game Over");
         break;
