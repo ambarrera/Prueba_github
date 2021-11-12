@@ -31,9 +31,11 @@ void Game::handleInput() {
             switch (cursorPos) {
             case 0:
                 game_state = EXPLORATION;
+                cursorPos = 0;
                 break;
             case 1:
                 game_state = EXPLORATION;
+                cursorPos = 0;
                 break;
             case 2:
                 game_state = CREDITS;
@@ -78,6 +80,29 @@ void Game::handleInput() {
         break;
 
     case GAME_OVER:
+        if (keyPressed('J')) {
+            switch (cursorPos) {
+            case 0:
+                game_state = EXPLORATION;
+                player.hp = 247;
+                cursorPos = 0;
+                break;
+            case 1:
+                game_state = MAIN_MENU;
+                cursorPos = 0;
+                break;
+            default:
+                break;
+            }
+        }
+        if (keyPressed('W')) {
+            if (cursorPos != 0)
+                cursorPos -= 1;
+        }
+        if (keyPressed('S')) {
+            if (cursorPos != 1)
+                cursorPos += 1;
+        }
         break;
 
     case CREDITS:
@@ -90,9 +115,34 @@ void Game::handleInput() {
 
 void Game::updateAllObjects() {
     //Aquí se maneja la lógica del juego
-    int x = 4;
-    int y = 5;
-    char myChar = '@';
+    switch (game_state) {
+    case MAIN_MENU:
+        break;
+
+    case EXPLORATION:
+        if (player.x == 30)
+            game_state = COMBAT;
+        if (player.hp <= 0) {
+            player.hp = 0;
+            game_state = GAME_OVER;
+        }
+        break;
+
+    case COMBAT:
+        player.hp -= 1;
+        if (player.hp <= 0) {
+            player.hp = 0;
+            game_state = GAME_OVER;
+        }
+        break;
+
+    case GAME_OVER:
+        break;
+
+    case CREDITS:
+        break;
+    }
+   
 }
 
 void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
@@ -116,10 +166,13 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
 
     case COMBAT:
         drawUI();
+        draw(38, 1, "    COMBAT    ");
         break;
 
     case GAME_OVER:
         draw(0, 0, "Game Over");
+        draw(0, 1, "Press J to choose an option");
+        drawGameOver();
         break;
 
     case CREDITS:

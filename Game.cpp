@@ -44,6 +44,22 @@ void Game::draw(int x, int y, char* myString) {
     }
 }
 
+void Game::draw(int x, int y, int num) {
+    char numChars[10] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+    if (num >= 100) {
+        screen[y * width + x] = numChars[num / 100];
+        screen[y * width + x + 1] = numChars[(num % 100) / 10];
+        screen[y * width + x + 2] = numChars[(num % 100) % 10];
+    }
+    else if (num >= 10) {
+        screen[y * width + x] = numChars[num / 10];
+        screen[y * width + x + 1] = numChars[num % 10];
+    }
+    else {
+        screen[y * width + x] = numChars[num];
+    }
+}
+
 void Game::drawMainMenu() {
     //LETRA M        
     draw(10, 5, char(219)); draw(11, 4, char(219)); draw(12, 3, char(219)); draw(13, 3, char(219)); draw(14, 3, char(219)); draw(15, 3, char(219)); draw(16, 2, char(219)); draw(17, 2, char(219)); draw(18, 2, char(219));
@@ -242,9 +258,9 @@ void Game::drawUI() {
     draw(90, 3, "HP:");
     draw(90, 4, "ATK:");
     draw(90, 5, "DEF:");
-    draw(95, 3, "100");
-    draw(95, 4, "30");
-    draw(95, 5, "20");
+    draw(95, 3, player.hp);
+    draw(95, 4, player.atk);
+    draw(95, 5, player.def);
     //Cuadrante del "inventory"
     draw(89, 8, "_INVENTORY_________________");
     for (int i = 0; i < 12; i++) {
@@ -253,4 +269,13 @@ void Game::drawUI() {
     }
     draw(88, 21, "|___________________________|");
     draw(90, 10, "1 potion");
+}
+
+void Game::drawGameOver() {
+    //Comandos(?)
+    draw(45, 15, "Continue");
+    draw(45, 16, "Main Menu");
+
+    //Cursor
+    draw(43, 15 + cursorPos, char(175));
 }

@@ -16,11 +16,13 @@ public:
 
     void draw(int x, int y, char character);
     void draw(int x, int y, char* myString);
+    void draw(int x, int y, int num);
     bool keyPressed(int key);
 
     void drawMainMenu();
     void drawMap(int numMap);
     void drawUI();
+    void drawGameOver();
 
     //Enum del estado del juego
     enum GameStates {
