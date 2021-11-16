@@ -271,6 +271,47 @@ void Game::drawUI() {
     draw(90, 10, "1 potion");
 }
 
+void Game::drawEnemy(int enemyNum) {
+    switch (enemyNum) {
+    case 0:
+        draw(21, 5, "|=|");
+        draw(20, 6, "/"); draw(21, 6, "/");
+        draw(24, 6, char(92)); draw(25, 6, char(92));
+        draw(22, 6, "##");
+        draw(22, 7, "##");
+        draw(22, 8, char(217));
+        draw(23, 8, char(192));
+        break;
+
+    case 1:
+        draw(21, 5, char(200));
+        draw(22, 5, char(233));
+        draw(23, 5, char(188));
+        draw(20, 6, "/");
+        draw(21, 6, "|"); draw(23, 6, "|");
+        draw(21, 7, "|"); draw(23, 7, "|");
+        draw(22, 7, "_");
+        draw(24, 6, char(92));
+        draw(21, 8, char(217));
+        draw(23, 8, char(192));
+        break;
+
+
+    case 2:
+        draw(20, 5, "_"); draw(22, 5, "_");
+        draw(21, 5, "|=|");
+        draw(19, 6, "/");
+        draw(20, 6, "|"); draw(23, 6, "|");
+        draw(20, 7, "|"); draw(23, 7, "|");
+        draw(24, 6, char(92));
+        draw(20, 8, "W");
+        draw(23, 8, "W");
+
+    }
+
+    
+}
+
 void Game::drawGameOver() {
     //Comandos(?)
     draw(45, 15, "Continue");
