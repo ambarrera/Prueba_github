@@ -5,13 +5,13 @@
 using namespace std;
 
 int main() {
-    Game myGame(120, 30); //Instancia de la clase game de 120 x 30
+    Game myGame(120, 30, 100, 12, 12); //Instancia de la clase game de 120 x 30
     while (myGame.running) { //El "Game loop" principal 
         myGame.handleInput();
         myGame.updateAllObjects();
         myGame.updateScreen();
         myGame.renderScreen(); //Esto ya está definido en Game.cpp
-        Sleep(64);
+        Sleep(32);
     }
     return 0;
 }
@@ -29,102 +29,138 @@ void Game::handleInput() {
     switch (game_state) {
     case MAIN_MENU:
         if (keyPressed(VK_SPACE)) {
-            switch (cursorPos) {
-            case 0:
-                game_state = EXPLORATION;
-                cursorPos = 0;
-                break;
-            case 1:
-                game_state = EXPLORATION;
-                cursorPos = 0;
-                break;
-            case 2:
-                game_state = CREDITS;
-                break;
-            case 3:
-                running = false;
-                break;
-            default:
-                break;
+            if (lastKeyPressed != VK_SPACE) {
+                switch (cursorPos) {
+                case 0:
+                    game_state = EXPLORATION;
+                    cursorPos = 0;
+                    break;
+                case 1:
+                    game_state = EXPLORATION;
+                    cursorPos = 0;
+                    break;
+                case 2:
+                    game_state = CREDITS;
+                    break;
+                case 3:
+                    running = false;
+                    break;
+                default:
+                    break;
+                }
+                lastKeyPressed = VK_SPACE;
             }
         }
-        if (keyPressed('W')) {
-            if (cursorPos != 0)
+        else if (keyPressed('W')) {
+            if (cursorPos != 0 && lastKeyPressed != 'W') {
                 cursorPos -= 1;
+                lastKeyPressed = 'W';
+            }
         }
-        if (keyPressed('S')) {
-            if (cursorPos != 3)
+        else if (keyPressed('S')) {
+            if (cursorPos != 3 && lastKeyPressed != 'S') {
                 cursorPos += 1;
+                lastKeyPressed = 'S';
+            }
+        }
+        else {
+            lastKeyPressed = 0;
         }
         break;
 
     case EXPLORATION:
         if (keyPressed('A')) {
-            if (player.x != 5)
-                player.x -= 1;
+            if (player -> x != 5)
+                player -> x -= 1;
         }
         if (keyPressed('D')) {
-            if (player.x != 84)
-                player.x += 1;
+            if (player -> x != 84)
+                player -> x += 1;
         }
         if (keyPressed('W')) {
-            if (player.y != 2)
-                player.y -= 1;
+            if (player -> y != 2)
+                player -> y -= 1;
         }
         if (keyPressed('S')) {
-            if (player.y != 21)
-                player.y += 1;
+            if (player -> y != 21)
+                player -> y += 1;
         }
         break;
 
     case COMBAT:
         if (keyPressed('A')) {
-            if ((player.square % 6) != 0)
-                player.square -= 1;
+            if ((player->square % 6) != 0 && lastKeyPressed != 'A') {
+                player->square -= 1;
+                lastKeyPressed = 'A';
+            }
         }
-        if (keyPressed('D')) {
-            if ((player.square + 1) % 6 != 0)
-                player.square += 1;
+        else if (keyPressed('D')) {
+            if ((player->square + 1) % 6 != 0 && lastKeyPressed != 'D') {
+                player->square += 1;
+                lastKeyPressed = 'D';
+            }
         }
-        if (keyPressed('W')) {
-            if (player.square >= 6)
-                player.square -= 6;
+        else if (keyPressed('W')) {
+            if (player->square >= 6 && lastKeyPressed != 'W') {
+                player->square -= 6;
+                lastKeyPressed = 'W';
+            }
         }
-        if (keyPressed('S')) {
-            if (player.square <= 11)
-                player.square += 6;
+        else if (keyPressed('S')) {
+            if (player->square <= 11 && lastKeyPressed != 'S') {
+                player->square += 6;
+                lastKeyPressed = 'S';
+            }
+        }
+        else {
+            lastKeyPressed = 0;
         }
         break;
 
     case GAME_OVER:
-        if (keyPressed('J')) {
-            switch (cursorPos) {
-            case 0:
-                game_state = EXPLORATION;
-                player.hp = 247;
-                cursorPos = 0;
-                break;
-            case 1:
-                game_state = MAIN_MENU;
-                cursorPos = 0;
-                break;
-            default:
-                break;
+        if (keyPressed(VK_SPACE)) {
+            if (lastKeyPressed != VK_SPACE) {
+                switch (cursorPos) {
+                case 0:
+                    game_state = EXPLORATION;
+                    player->hp = 247;
+                    cursorPos = 0;
+                    break;
+                case 1:
+                    game_state = MAIN_MENU;
+                    cursorPos = 0;
+                    break;
+                default:
+                    break;
+                }
             }
         }
-        if (keyPressed('W')) {
-            if (cursorPos != 0)
+        else if (keyPressed('W')) {
+            if (cursorPos != 0 && lastKeyPressed != 'W') {
                 cursorPos -= 1;
+                lastKeyPressed = 'W';
+            }
         }
-        if (keyPressed('S')) {
-            if (cursorPos != 1)
+        else if (keyPressed('S')) {
+            if (cursorPos != 1 && lastKeyPressed != 'S') {
                 cursorPos += 1;
+                lastKeyPressed = 'S';
+            }
+        }
+        else {
+            lastKeyPressed = 0;
         }
         break;
 
     case CREDITS:
-        if (keyPressed('J')) {
-            game_state = MAIN_MENU;
+        if (keyPressed(VK_SPACE)) {
+            if (lastKeyPressed != VK_SPACE) {
+                game_state = MAIN_MENU;
+                lastKeyPressed = VK_SPACE;
+            }
+        }
+        else {
+            lastKeyPressed = 0;
         }
         break;
     }
@@ -137,17 +173,17 @@ void Game::updateAllObjects() {
         break;
 
     case EXPLORATION:
-        if (player.x == 30)
+        if (player -> x == 30)
             game_state = COMBAT;
-        if (player.hp <= 0) {
-            player.hp = 0;
+        if (player -> hp <= 0) {
+            player -> hp = 0;
             game_state = GAME_OVER;
         }
         break;
 
     case COMBAT:
-        if (player.hp <= 0) {
-            player.hp = 0;
+        if (player -> hp <= 0) {
+            player -> hp = 0;
             game_state = GAME_OVER;
         }
         break;
@@ -177,8 +213,8 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
     case EXPLORATION:
         drawUI();
         drawMap(0);
-        draw(npc.x, npc.y, '#');
-        draw(player.x, player.y, '@');
+        draw(npcs[0].x, npcs[0].y, '#');
+        draw(player -> x, player -> y, '@');
         break;
 
     case COMBAT:
@@ -189,7 +225,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
 
     case GAME_OVER:
         draw(0, 0, "Game Over");
-        draw(0, 1, "Press J to choose an option");
+        draw(0, 1, "Press SPACE to choose an option");
         drawGameOver();
         break;
 

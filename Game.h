@@ -5,10 +5,9 @@
 class Game {
 public:
     //Constructor
-    Game(int screenWidth, int screenHeight);
+    Game(int screenWidth, int screenHeight, int playerHp, int playerX, int playerY);
 
     //Funciones
-    void setUpScreen();
 
     void handleInput();
     void updateAllObjects();
@@ -39,17 +38,22 @@ public:
     GameStates game_state;
 
     //Objetos y actores del juego;
-    Player player;
-    Npc npc;
+    Player *player; //puntero a una instancia de player
+    Npc *npcs; //array donde estan los npcs
+
     //Variables
     bool running;
     int width;
     int height;
 
     int cursorPos;
+    int lastKeyPressed;
 
-    //Variables privadas para configurar la pantalla
+private:
+    //Variables privadas y funcion para configurar la pantalla
     TCHAR* screen;
     HANDLE console;
     DWORD dwBytesWritten;
+
+    void setUpScreen();
 };

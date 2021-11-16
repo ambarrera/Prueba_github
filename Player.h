@@ -19,4 +19,15 @@ public:
 		exp = 0;
 		square = 0;
 	}
+
+	Player(int hp, int def, int atk, int x, int y, int exp, int square) {
+		this -> hp = hp;
+		this -> def = def;
+		this -> atk = atk;
+		this -> x = x;
+		this -> y = y;
+		this -> exp = exp;
+		this -> square = square;
+	}
+
 };

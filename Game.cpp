@@ -2,13 +2,16 @@
 
 #include "Game.h"
 
-Game::Game(int screenWidth, int screenHeight) {
+Game::Game(int screenWidth, int screenHeight, int playerHp, int playerX, int playerY) {
     //Variables
     running = true;
     height = screenHeight;
     width = screenWidth;
     game_state = MAIN_MENU;
     cursorPos = 0;
+    lastKeyPressed = 0;
+    player = new Player(playerHp, 12, 12, playerX, playerY, 12, 7);
+    npcs = new Npc[1];
 
     //Configuración de pantalla (private)
     setUpScreen();
@@ -258,9 +261,9 @@ void Game::drawUI() {
     draw(90, 3, "HP:");
     draw(90, 4, "ATK:");
     draw(90, 5, "DEF:");
-    draw(95, 3, player.hp);
-    draw(95, 4, player.atk);
-    draw(95, 5, player.def);
+    draw(95, 3, player -> hp);
+    draw(95, 4, player -> atk);
+    draw(95, 5, player -> def);
     //Cuadrante del "inventory"
     draw(89, 8, "_INVENTORY_________________");
     for (int i = 0; i < 12; i++) {
@@ -280,10 +283,10 @@ void Game::drawCombat() {
         for (int i = 0; i < 65; i += 10)
             draw(14 + i, 11 + 1 + j, "|");
     }
-    draw(14 + 3 + (player.square % 6) * 10, (player.square / 6) * 3 + 11, "|_o");
-    draw(14 + 4 + (player.square % 6) * 10, (player.square / 6) * 3 + 11 + 1, "/|\\");
-    draw(14 + 4 + (player.square % 6) * 10, (player.square / 6) * 3 + 11 + 2, "/ \\");
-    draw(14 + 3 + (player.square % 6) * 10, (player.square / 6) * 3 + 11 + 1, char(197));
+    draw(14 + 3 + (player -> square % 6) * 10, (player -> square / 6) * 3 + 11, "|_o");
+    draw(14 + 4 + (player -> square % 6) * 10, (player -> square / 6) * 3 + 11 + 1, "/|\\");
+    draw(14 + 4 + (player -> square % 6) * 10, (player -> square / 6) * 3 + 11 + 2, "/ \\");
+    draw(14 + 3 + (player -> square % 6) * 10, (player -> square / 6) * 3 + 11 + 1, char(197));
 }
 
 void Game::drawEnemy(int enemyNum) {
