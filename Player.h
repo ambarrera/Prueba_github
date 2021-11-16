@@ -8,6 +8,7 @@ public:
 	int x;
 	int y;	
 	int exp;
+	int square;
 
 	Player() {
 		hp = 100;
@@ -16,5 +17,6 @@ public:
 		x = 20;
 		y = 2;
 		exp = 0;
+		square = 0;
 	}
 };

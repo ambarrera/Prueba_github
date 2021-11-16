@@ -22,6 +22,7 @@ public:
     void drawMainMenu();
     void drawMap(int numMap);
     void drawUI();
+    void drawCombat();
     void drawGameOver();
 
     //Enum del estado del juego

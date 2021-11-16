@@ -271,6 +271,21 @@ void Game::drawUI() {
     draw(90, 10, "1 potion");
 }
 
+void Game::drawCombat() {
+    draw(15, 11, "___________________________________________________________");
+    draw(14, 11 + 3, "____________________________________________________________");
+    draw(14, 11 + 6, "____________________________________________________________");
+    draw(14, 11 + 9, "____________________________________________________________");
+    for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < 65; i += 10)
+            draw(14 + i, 11 + 1 + j, "|");
+    }
+    draw(14 + 3 + (player.square % 6) * 10, (player.square / 6) * 3 + 11, "|_o");
+    draw(14 + 4 + (player.square % 6) * 10, (player.square / 6) * 3 + 11 + 1, "/|\\");
+    draw(14 + 4 + (player.square % 6) * 10, (player.square / 6) * 3 + 11 + 2, "/ \\");
+    draw(14 + 3 + (player.square % 6) * 10, (player.square / 6) * 3 + 11 + 1, char(197));
+}
+
 void Game::drawGameOver() {
     //Comandos(?)
     draw(45, 15, "Continue");
