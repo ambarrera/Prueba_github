@@ -22,8 +22,9 @@ public:
     void drawMainMenu();
     void drawMap(int numMap);
     void drawUI();
+    void drawCombat();
+    void drawEnemy(int numEnemy);
     void drawGameOver();
-    void drawEnemy(int enemyNum);
 
     //Enum del estado del juego
     enum GameStates {

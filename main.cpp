@@ -77,6 +77,22 @@ void Game::handleInput() {
         break;
 
     case COMBAT:
+        if (keyPressed('A')) {
+            if ((player.square % 6) != 0)
+                player.square -= 1;
+        }
+        if (keyPressed('D')) {
+            if ((player.square + 1) % 6 != 0)
+                player.square += 1;
+        }
+        if (keyPressed('W')) {
+            if (player.square >= 6)
+                player.square -= 6;
+        }
+        if (keyPressed('S')) {
+            if (player.square <= 11)
+                player.square += 6;
+        }
         break;
 
     case GAME_OVER:
@@ -129,7 +145,6 @@ void Game::updateAllObjects() {
         break;
 
     case COMBAT:
-        player.hp -= 1;
         if (player.hp <= 0) {
             player.hp = 0;
             game_state = GAME_OVER;
@@ -166,8 +181,8 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
 
     case COMBAT:
         drawUI();
-        drawEnemy(2);
         draw(38, 1, "    COMBAT    ");
+        drawCombat();
         break;
 
     case GAME_OVER:
