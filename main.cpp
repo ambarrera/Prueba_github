@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Game.h"
 
+
 using namespace std;
 
 int main() {
@@ -176,6 +177,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
     case EXPLORATION:
         drawUI();
         drawMap(0);
+        draw(npc.x, npc.y, '#');
         draw(player.x, player.y, '@');
         break;
 

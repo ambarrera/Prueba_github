@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include "Player.h"
+#include "Npc.h"
 
 class Game {
 public:
@@ -39,7 +40,7 @@ public:
 
     //Objetos y actores del juego;
     Player player;
-
+    Npc npc;
     //Variables
     bool running;
     int width;
