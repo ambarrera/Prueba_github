@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include "Player.h"
 #include "Npc.h"
+#include "Map.h"
 
 class Game {
 public:
@@ -40,6 +41,7 @@ public:
     //Objetos y actores del juego;
     Player *player; //puntero a una instancia de player
     Npc *npcs; //array donde estan los npcs
+    Map map;
 
     //Variables
     bool running;
