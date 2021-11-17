@@ -11,7 +11,7 @@ int main() {
         myGame.updateAllObjects();
         myGame.updateScreen();
         myGame.renderScreen(); //Esto ya está definido en Game.cpp
-        Sleep(32);
+        //Sleep(32);
     }
     return 0;
 }
@@ -179,22 +179,22 @@ void Game::updateAllObjects() {
             player -> hp = 0;
             game_state = GAME_OVER;
         }
-        if (player -> y == 21 && map.numMap == 0) {
-            map.numMap = 1;
+        if (player -> y == 21 && map->numMap == 0) {
+            map->numMap = 1;
             player -> y = 3;
             player->x = player->x + 2;
         }
-        if (player->y == 2 && map.numMap == 1) {
-            map.numMap = 0;
+        if (player->y == 2 && map->numMap == 1) {
+            map->numMap = 0;
             player->x = player->x - 2;
             player-> y = 20;
         }
-        if (player->y == 2 && map.numMap ==0) {
-            map.numMap = 2;
+        if (player->y == 2 && map->numMap ==0) {
+            map->numMap = 2;
             player->y = 20;
         }
-        if (player->y == 21 && map.numMap == 2) {
-            map.numMap = 0;
+        if (player->y == 21 && map->numMap == 2) {
+            map->numMap = 0;
             player->y = 3;
         }
         break;
@@ -230,7 +230,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
 
     case EXPLORATION:
         drawUI();
-        drawMap(map.numMap);
+        drawMap(map->numMap);
         draw(npcs[0].x, npcs[0].y, '#');
         draw(player -> x, player -> y, '@');
         break;
@@ -250,7 +250,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
 
     case CREDITS:
         draw(0, 0, "Credits (Work in progress)");
-        draw(0, 1, "Press J to go back");
+        draw(0, 1, "Press SPACE to go back");
         break;
     }
 }

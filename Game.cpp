@@ -1,6 +1,7 @@
 #include <Windows.h>
 
 #include "Game.h"
+#include <iostream>
 
 Game::Game(int screenWidth, int screenHeight, int playerHp, int playerX, int playerY) {
     //Variables
@@ -12,21 +13,24 @@ Game::Game(int screenWidth, int screenHeight, int playerHp, int playerX, int pla
     lastKeyPressed = 0;
     player = new Player(playerHp, 12, 12, playerX, playerY, 12, 7);
     npcs = new Npc[1];
+    map = new Map;
 
     //Configuración de pantalla (private)
     setUpScreen();
 }
 
 void Game::setUpScreen() {
-    screen = new TCHAR[width * height];
-    console = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-    dwBytesWritten = 0;
-    SetConsoleActiveScreenBuffer(console);
+    screen = new char[width * height];
 }
 
 void Game::renderScreen() {
-    screen[width * height - 1] = '\0';
-    WriteConsoleOutputCharacter(console, screen, width * height, { 0, 0 }, &dwBytesWritten);
+    //screen[width * height - 1] = '\0';
+    system("CLS");
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            std::cout << screen[y * width + x];
+        }
+    }
 }
 
 bool Game::keyPressed(int key) {
@@ -598,8 +602,8 @@ void Game::drawCombat() {
     }
 
     for (int i = 0; i < 25;) {
-        draw(10 + i, 9, "||");
-        draw(56 + i, 9, "||");
+        draw(10 + i, 9, "|");
+        draw(56 + i, 9, "|");
         i = i + 4;
     }
     //End combat background

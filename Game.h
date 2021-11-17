@@ -41,7 +41,7 @@ public:
     //Objetos y actores del juego;
     Player *player; //puntero a una instancia de player
     Npc *npcs; //array donde estan los npcs
-    Map map;
+    Map *map;
 
     //Variables
     bool running;
@@ -53,9 +53,7 @@ public:
 
 private:
     //Variables privadas y funcion para configurar la pantalla
-    TCHAR* screen;
-    HANDLE console;
-    DWORD dwBytesWritten;
+    char* screen;
 
     void setUpScreen();
 };
