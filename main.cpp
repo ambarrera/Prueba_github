@@ -181,13 +181,21 @@ void Game::updateAllObjects() {
         }
         if (player -> y == 21 && map.numMap == 0) {
             map.numMap = 1;
-            player -> x = 22;
             player -> y = 3;
+            player->x = player->x + 2;
         }
         if (player->y == 2 && map.numMap == 1) {
             map.numMap = 0;
-            player-> x = 22;
+            player->x = player->x - 2;
             player-> y = 20;
+        }
+        if (player->y == 2 && map.numMap ==0) {
+            map.numMap = 2;
+            player->y = 20;
+        }
+        if (player->y == 21 && map.numMap == 2) {
+            map.numMap = 0;
+            player->y = 3;
         }
         break;
 

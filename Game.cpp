@@ -230,7 +230,7 @@ void Game::drawMap(int numMap) {
             draw(21, 2 + i, char(32));
             draw(22, 2 + i, char(32));
         }
-        break;
+        break;  
 
     case 1:
         //Pasto
@@ -415,6 +415,107 @@ void Game::drawMap(int numMap) {
             draw(44 + i, 17, char(32));
         }
         break;
+
+    case 2:
+        //Pasto
+        for (int i = 0; i < 80; i++) {
+            for (int j = 0; j < 20; j++) {
+                draw(5 + i, 2 + j, char(176));
+            }
+        }
+        //Copa de árbol
+        for (int i = 0; i < 80; i = i + 3) {
+            draw(6 + i, 2, '^');
+            draw(6 + i, 6, '^');
+            draw(6 + i, 14, '^');
+            draw(6 + i, 18, '^');
+        }
+        //Tronco
+        for (int i = 0; i < 80; i = i + 3) {
+            draw(6 + i, 5, char(186));
+            draw(6 + i, 9, char(186));
+            draw(6 + i, 17, char(186));
+            draw(6 + i, 21, char(186));
+        }
+        //Hoja Izquierda
+        for (int i = 0; i < 80; i = i + 3) {
+            draw(5 + i, 3, char(47));
+            draw(5 + i, 4, char(47));
+            draw(5 + i, 7, char(47));
+            draw(5 + i, 8, char(47));
+            draw(5 + i, 15, char(47));
+            draw(5 + i, 16, char(47));
+            draw(5 + i, 19, char(47));
+            draw(5 + i, 20, char(47));
+        }
+        //Hoja Derecha
+        for (int i = 0; i < 78; i = i + 3) {
+            draw(7 + i, 3, char(92));
+            draw(7 + i, 4, char(92));
+            draw(7 + i, 7, char(92));
+            draw(7 + i, 8, char(92));
+            draw(7 + i, 15, char(92));
+            draw(7 + i, 16, char(92));
+            draw(7 + i, 19, char(92));
+            draw(7 + i, 20, char(92));
+        }
+        //Centro del Árbol
+        for (int i = 0; i < 80; i = i + 3) {
+            draw(6 + i, 3, char(32));
+            draw(6 + i, 4, char(32));
+            draw(6 + i, 7, char(32));
+            draw(6 + i, 8, char(32));
+            draw(6 + i, 15, char(32));
+            draw(6 + i, 16, char(32));
+            draw(6 + i, 19, char(32));
+            draw(6 + i, 20, char(32));
+        }
+
+        //Vacio
+        for (int i = 0; i < 15; i++) {
+            for (int j = 0; j < 20; j++) {
+                draw(41 + i, 2 + j, char(176));
+            }
+        }
+        for (int i = 0; i < 11; i++) {
+            for (int j = 0; j < 20; j++) {
+                draw(43 + i, 2 + j, char(32));
+            }
+        }
+        for (int i = 0; i < 15; i++) {
+            draw(41 + i, 2, char(32) );
+            draw(41 + i, 10, char(32));
+            draw(41 + i, 13, char(32));
+            draw(41 + i, 21, char(32));
+        }
+        for (int i = 0; i < 13; i++) {
+            draw(42 + i, 3, char(32));
+            draw(42 + i, 9, char(32));
+            draw(42 + i, 14, char(32));
+            draw(42 + i, 20, char(32));
+        }
+
+
+        //Camino
+        for (int i = 0; i < 75; i++) {
+            draw(8 + i, 11, char(32));
+            draw(8 + i, 12, char(32));
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                draw(20 + i, 13 + j, char(32));
+            }
+        }
+
+        //Puente
+        for (int i = 0; i < 17; i++) {
+            draw(40 + i, 11, char(186));
+            draw(40 + i, 12, char(186));
+            draw(40 + i, 10, char(205));
+            draw(40 + i, 13, char(205));
+        }
+
+
     }
 }
 
