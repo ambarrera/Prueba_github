@@ -239,6 +239,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         drawUI();
         draw(38, 1, "    COMBAT    ");
         drawCombat();
+        drawEnemy(1);
         break;
 
     case GAME_OVER:

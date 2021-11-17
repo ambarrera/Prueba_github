@@ -561,6 +561,49 @@ void Game::drawUI() {
 }
 
 void Game::drawCombat() {
+    //Background -- moon
+    draw(43, 4, char(239)); draw(44, 3, "_"); draw(45, 5, "/");
+    draw(47, 4, char(239)); draw(48, 3, "_"); draw(49, 7, "/");
+    draw(48, 8, char(239)); draw(45, 8, "_"); draw(41, 5, "/");
+    draw(45, 3, char(44));  draw(46, 3, "."); draw(46, 8, "-");
+    draw(46, 4, char(44));  draw(44, 6, "."); draw(44, 8, "-");
+    draw(47, 8, char(44));  draw(46, 7, "."); draw(41, 6, "|");
+    draw(42, 4, char(44));  draw(43, 8, ".");
+    draw(45, 7, char(96));  draw(47, 7, "__");
+    draw(49, 4, char(96));
+    draw(42, 8, char(96));
+    draw(41, 7, char(92));
+
+    //Background -- trees
+    for (int i = 0; i < 25;) {
+        draw(10 + i, 6, "^");
+        draw(56 + i, 6, "^");
+        i = i + 4;
+    }
+
+    for (int i = 0; i < 25;) {
+        draw(11 + i, 7, "\\");
+        draw(57 + i, 7, "\\");
+        draw(11 + i, 8, "\\");
+        draw(57 + i, 8, "\\");
+        i = i + 4;
+    }
+
+    for (int i = 0; i < 25;) {
+        draw(9 + i, 7, "/");
+        draw(55 + i, 7, "/");
+        draw(9 + i, 8, "/");
+        draw(55 + i, 8, "/");
+        i = i + 4;
+    }
+
+    for (int i = 0; i < 25;) {
+        draw(10 + i, 9, "||");
+        draw(56 + i, 9, "||");
+        i = i + 4;
+    }
+    //End combat background
+
     draw(15, 11, "___________________________________________________________");
     draw(14, 11 + 3, "____________________________________________________________");
     draw(14, 11 + 6, "____________________________________________________________");
@@ -578,38 +621,38 @@ void Game::drawCombat() {
 void Game::drawEnemy(int enemyNum) {
     switch (enemyNum) {
     case 0:
-        draw(21, 5, "|=|");
-        draw(20, 6, "/"); draw(21, 6, "/");
-        draw(24, 6, char(92)); draw(25, 6, char(92));
-        draw(22, 6, "##");
-        draw(22, 7, "##");
-        draw(22, 8, char(217));
-        draw(23, 8, char(192));
+        draw(47, 15, "|=|");
+        draw(45, 16, "/"); draw(46, 16, "/");
+        draw(49, 16, char(92)); draw(50, 16, char(92));
+        draw(47, 16, "##");
+        draw(47, 17, "##");
+        draw(47, 18, char(217));
+        draw(48, 18, char(192));
         break;
 
     case 1:
-        draw(21, 5, char(200));
-        draw(22, 5, char(233));
-        draw(23, 5, char(188));
-        draw(20, 6, "/");
-        draw(21, 6, "|"); draw(23, 6, "|");
-        draw(21, 7, "|"); draw(23, 7, "|");
-        draw(22, 7, "_");
-        draw(24, 6, char(92));
-        draw(21, 8, char(217));
-        draw(23, 8, char(192));
+        draw(47, 15, char(200));
+        draw(48, 15, char(233));
+        draw(49, 15, char(188));
+        draw(46, 16, "/");
+        draw(47, 16, "|"); draw(49, 16, "|");
+        draw(47, 17, "|"); draw(49, 17, "|");
+        draw(48, 17, "_");
+        draw(50, 16, char(92));
+        draw(47, 18, char(217));
+        draw(49, 18, char(192));
         break;
 
 
     case 2:
-        draw(20, 5, "_"); draw(22, 5, "_");
-        draw(21, 5, "|=|");
-        draw(19, 6, "/");
-        draw(20, 6, "|"); draw(23, 6, "|");
-        draw(20, 7, "|"); draw(23, 7, "|");
-        draw(24, 6, char(92));
-        draw(20, 8, "W");
-        draw(23, 8, "W");
+        draw(46, 15, "_"); draw(48, 15, "_");
+        draw(47, 15, "|=|");
+        draw(45, 16, "/");
+        draw(46, 16, "|"); draw(49, 16, "|");
+        draw(46, 17, "|"); draw(49, 17, "|");
+        draw(50, 16, char(92));
+        draw(46, 18, "W");
+        draw(49, 18, "W");
         break;
     }
 }
