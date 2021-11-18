@@ -324,6 +324,26 @@ public:
                 draw(6 + i, 19, char(32));
                 draw(6 + i, 20, char(32));
             }
+            //CASA
+            //Pasto
+            for (int i = 0; i < 12; i++) {
+                for (int j = 0; j < 4; j++) {
+                    draw(29 + i, 6 + j, char(176));
+                }
+            }
+            //Tejas
+            for (int i = 0; i < 7; i++) {
+                draw(30 + i, 7, char(47));
+            }
+            draw(37, 7, char(92));
+            //Muros
+            for (int i = 0; i < 8; i++) {
+                draw(30 + i, 8, char(124));
+            }
+            //Pisos
+            for (int i = 0; i < 5; i++) {
+                draw(31 + i, 8, char(95));
+            }
 
             //Vacio
             for (int i = 0; i < 15; i++) {
@@ -360,6 +380,8 @@ public:
                     draw(20 + i, 13 + j, char(32));
                 }
             }
+
+            draw(36, 9, char(32)); draw(36, 10, char(32)); draw(37, 9, char(32)); draw(37, 10, char(32));
 
             //Puente
             for (int i = 0; i < 17; i++) {

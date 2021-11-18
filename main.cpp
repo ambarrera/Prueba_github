@@ -236,6 +236,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         if (player->x == npcs[map->numMap].x && player->y == npcs[map->numMap].y) {
             draw(6, 24, npcs[map->numMap].name);
         }
+        draw(chest[map->numMap].x, chest[map->numMap].y, 'C');
         draw(player -> x, player -> y, '@');
         break;
 

@@ -11,7 +11,7 @@ Game::Game(int screenWidth, int screenHeight, int playerHp, int playerX, int pla
     game_state = MAIN_MENU;
     cursorPos = 0;
     lastKeyPressed = 0;
-    player = new Player(playerHp, 12, 12, playerX, playerY, 12, 7);
+    player = new Player(playerHp, 8, 12, playerX, playerY, 12, 7);
     npcs = new Npc[3];
     npcs[0].setNameTo("Solaire");
     npcs[0].setCharacterTo('#');
@@ -21,7 +21,11 @@ Game::Game(int screenWidth, int screenHeight, int playerHp, int playerX, int pla
     npcs[1].setCoordinates(15, 9);
     npcs[2].setNameTo("Burak");
     npcs[2].setCharacterTo(char(224));
-    npcs[2].setCoordinates(32, 7);
+    npcs[2].setCoordinates(35, 9);
+    chest = new Chest[3];
+    chest[0].setCoordinates(84, 12);
+    chest[1].setCoordinates(13, 6);
+    chest[2].setCoordinates(82, 12);
 
     //Configuración de pantalla (private)
     setUpScreen();
@@ -296,8 +300,8 @@ void Game::drawEnemy(int enemyNum) {
         draw(48, 15, "|"); draw(50, 15, "|");
         draw(49, 15, "_");
         draw(51, 14, char(92));
-        draw(48, 16, char(217));    //46-47   47-48   48-49  49-50   50-51  
-        draw(50, 16, char(192));   //15-14  16-15  17-16    18-17
+        draw(48, 16, char(217));
+        draw(50, 16, char(192));
         break;
 
 

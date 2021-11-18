@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Npc.h"
 #include "Map.h"
+#include "Chest.h"
 
 class Game {
 public:
@@ -41,6 +42,7 @@ public:
     Player *player; //puntero a una instancia de player
     Npc *npcs; //array donde estan los npcs
     Map *map;
+    Chest *chest;
 
     //Variables
     bool running;
