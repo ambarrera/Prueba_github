@@ -21,7 +21,6 @@ public:
     bool keyPressed(int key);
 
     void drawMainMenu();
-    void drawMap(int numMap);
     void drawUI();
     void drawCombat();
     void drawEnemy(int numEnemy);

@@ -173,7 +173,7 @@ void Game::updateAllObjects() {
         break;
 
     case EXPLORATION:
-        if (player -> x == 30)
+        if (player -> x == 50)
             game_state = COMBAT;
         if (player -> hp <= 0) {
             player -> hp = 0;
@@ -230,8 +230,12 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
 
     case EXPLORATION:
         drawUI();
-        drawMap(map->numMap);
-        draw(npcs[0].x, npcs[0].y, '#');
+        //drawMap(map->numMap);
+        map->drawMap(screen);
+        draw(npcs[map->numMap].x, npcs[map->numMap].y, npcs[map->numMap].character);
+        if (player->x == npcs[map->numMap].x && player->y == npcs[map->numMap].y) {
+            draw(6, 24, npcs[map->numMap].name);
+        }
         draw(player -> x, player -> y, '@');
         break;
 
