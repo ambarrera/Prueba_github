@@ -6,6 +6,7 @@ class Player:
 {
 public:
 	Player(int x, int y, char symbol);
+	void update();
 
 private:
 	void handleInput();

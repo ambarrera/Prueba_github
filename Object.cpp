@@ -17,7 +17,7 @@ void Object::OnInteract() {
 }
 
 void Object::draw(char **screen, int cornerX, int cornerY) {
-	screen[y + cornerY][x + cornerX];
+	screen[y + cornerY][x + cornerX] = symbol;
 }
 
 void Object::update() {

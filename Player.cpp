@@ -18,3 +18,7 @@ void Player::handleInput() {
 		move(Direction::DOWN);
 	}
 }
+
+void Player::update() {
+	handleInput();
+}

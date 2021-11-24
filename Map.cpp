@@ -28,6 +28,7 @@ void Map::setUpMap() {
 				map[y][x] = char(num);
 			}
 		}
+		mapFile.close();
 	}
 }
 
@@ -50,10 +51,10 @@ void Map::draw(char** screen) {
 	}
 	//Objects
 	player.draw(screen, cornerX, cornerY);
-	for (int i = 0; i < sizeof(npc); i++) {
+	for (int i = 0; i < 1; i++) {
 		npc[i].draw(screen, cornerX, cornerY);
 	}
-	for (int i = 0; i < sizeof(chest); i++) {
+	for (int i = 0; i < 1; i++) {
 		chest[i].draw(screen, cornerX, cornerY);
 	}
 }

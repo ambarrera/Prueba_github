@@ -9,6 +9,11 @@ public:
     void update();
     void draw(char** screen);
 
+    //Objetos
+    Player player;
+    Npc* npc;
+    Chest* chest;
+
 private:
 	//Variables
     int width;
@@ -16,11 +21,6 @@ private:
     int cornerX;
     int cornerY;
     char** map;
-
-    //Objetos
-    Player player;
-    Npc* npc;
-    Chest* chest;
 
     void setUpMap();
 };

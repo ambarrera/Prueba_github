@@ -1,5 +1,6 @@
 #pragma once
 #include "Map.h"
+#include "UI.h"
 
 #include <Windows.h>
 
@@ -39,4 +40,5 @@ private:
 
     //Objetos y actores del juego
     Map map;
+    UI ui;
 };
