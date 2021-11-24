@@ -6,8 +6,17 @@ UI::UI(int dialogueX, int dialogueY) {
 }
 
 void UI::displayDialogue(char** screen, std::string line) {
+    int numline = 0;
+    int numChar = 0;
 	for (int i = 0; line[i] != '\0'; i++) {
-		screen[dialogueY][dialogueX + i] = line[i];
+        if (line[i] != '_') {
+            screen[dialogueY + numline][dialogueX + numChar] = line[i];
+            numChar += 1;
+        }
+        else {
+            numline += 1;
+            numChar = 0;
+        }
 	}
 }
 

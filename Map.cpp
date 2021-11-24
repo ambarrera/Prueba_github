@@ -1,29 +1,31 @@
 #include "Map.h"
 #include <fstream>
 
-Map::Map(int width, int height, int cornerX, int cornerY, int playerX, int playerY):
+Map::Map(int cornerX, int cornerY, int playerX, int playerY):
 	player(playerX, playerY, '@')
 {
-	this->width = width;
-	this->height = height;
 	this->cornerX = cornerX;
 	this->cornerY = cornerY;
-	npc = new Npc(0, 0 , 'i', "Leonard");
+	npc = new Npc("Npc0.txt");
 	chest = new Chest(1, 0, 'C');
 	setUpMap();
 }
 
 void Map::setUpMap() {
-	map = new char*[height];
-	for (int i = 0; i < height; i++) {
-		map[i] = new char[width];
-	}
 	std::fstream mapFile;
 	mapFile.open("Map0.txt", std::ios::in);
 	if (mapFile.is_open()) {
 		int num;
-		for (int y = 0; y < 20; y++) {
-			for (int x = 0; x < 80; x++) {
+		mapFile >> num;
+		this->width = num;
+		mapFile >> num;
+		this->height = num;
+		map = new char* [height];
+		for (int i = 0; i < height; i++) {
+			map[i] = new char[width];
+		}
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
 				mapFile >> num;
 				map[y][x] = char(num);
 			}

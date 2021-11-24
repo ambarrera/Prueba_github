@@ -1,23 +1,25 @@
 #include "Npc.h"
 #include <fstream>
 
-Npc::Npc(int x, int y, char symbol, char* name):
-	Creature(x, y, symbol)
+Npc::Npc(char* fileName):
+	Creature(0, 0, 'N')
 {
-	for (int i = 0; name[i] != '\0'; i++) {
-		this->name[i] = name[i];
-	}
-	setUpDialogue();
-}
-
-void Npc::setUpDialogue() {
 	std::fstream npcFile;
-	npcFile.open("Npc0.txt", std::ios::in);
+	npcFile.open(fileName, std::ios::in);
 	if (npcFile.is_open()) {
+		std::string line;
+		std::getline(npcFile, line);
+		name = line;
 		int numLines;
 		npcFile >> numLines;
+		symbol = char(numLines);
+		npcFile >> numLines;
+		x = numLines;
+		npcFile >> numLines;
+		y = numLines;
+		npcFile >> numLines;
 		dialogue = new std::string[numLines];
-		std::string line;
+		std::getline(npcFile, line);
 		for (int i = 0; i < numLines; i++) {
 			std::getline(npcFile, line);
 			dialogue[i] = line;

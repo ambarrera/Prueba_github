@@ -4,7 +4,7 @@
 #include <iostream>
 
 Game::Game(int screenWidth, int screenHeight, int playerHp, int playerX, int playerY):
-    map(80, 20, 5, 2, 0, 9), ui(6, 24)
+    map(5, 2, 0, 9), ui(6, 24)
 {
     //Variables
     running = true;
@@ -43,7 +43,7 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
 
 void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
     ui.draw(screen);
-    ui.displayDialogue(screen, map.npc[0].getLineDialogue(2));
+    ui.displayDialogue(screen, map.npc[0].getLineDialogue(0));
     map.draw(screen);
 }
 

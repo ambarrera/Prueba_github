@@ -5,7 +5,7 @@
 
 class Map{
 public:
-    Map(int width, int height, int cornerX, int cornerY, int playerX, int playerY);
+    Map(int cornerX, int cornerY, int playerX, int playerY);
     void update();
     void draw(char** screen);
 
