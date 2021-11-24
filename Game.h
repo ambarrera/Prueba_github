@@ -1,31 +1,30 @@
-#include <Windows.h>
-#include "Player.h"
-#include "Npc.h"
+#pragma once
 #include "Map.h"
-#include "Chest.h"
+
+#include <Windows.h>
 
 class Game {
 public:
     //Constructor
     Game(int screenWidth, int screenHeight, int playerHp, int playerX, int playerY);
 
-    //Funciones
+    //Métodos
+    void run();
 
-    void handleInput();
+    //Métodos
     void updateAllObjects();
     void updateScreen();
     void renderScreen();
 
-    void draw(int x, int y, char character);
-    void draw(int x, int y, char* myString);
-    void draw(int x, int y, int num);
-    bool keyPressed(int key);
+private:
+    //Variables
+    bool running;
+    int width;
+    int height;
 
-    void drawMainMenu();
-    void drawUI();
-    void drawCombat();
-    void drawEnemy(int numEnemy);
-    void drawGameOver();
+    //Variables privadas y funcion para configurar la pantalla
+    char** screen;
+    void setUpScreen();
 
     //Enum del estado del juego
     enum GameStates {
@@ -38,23 +37,6 @@ public:
 
     GameStates game_state;
 
-    //Objetos y actores del juego;
-    Player *player; //puntero a una instancia de player
-    Npc *npcs; //array donde estan los npcs
-    Map *map;
-    Chest *chest;
-
-    //Variables
-    bool running;
-    int width;
-    int height;
-
-    int cursorPos;
-    int lastKeyPressed;
-
-private:
-    //Variables privadas y funcion para configurar la pantalla
-    char* screen;
-
-    void setUpScreen();
+    //Objetos y actores del juego
+    Map map;
 };

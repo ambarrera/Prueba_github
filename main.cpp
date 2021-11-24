@@ -1,21 +1,12 @@
 #include <iostream>
 #include "Game.h"
 
-
-using namespace std;
-
 int main() {
-    Game myGame(120, 30, 100, 12, 12); //Instancia de la clase game de 120 x 30
-    while (myGame.running) { //El "Game loop" principal 
-        myGame.handleInput();
-        myGame.updateAllObjects();
-        myGame.updateScreen();
-        myGame.renderScreen(); //Esto ya está definido en Game.cpp
-        //Sleep(32);
-    }
+    Game game(120, 30, 100, 12, 12); //Instancia de la clase game de 120 x 30
+    game.run();
     return 0;
 }
-
+/*
 void Game::handleInput() {
     //Aqui va el input de player
     if (keyPressed(VK_ESCAPE)) {
@@ -165,97 +156,4 @@ void Game::handleInput() {
         break;
     }
 }
-
-void Game::updateAllObjects() {
-    //Aquí se maneja la lógica del juego
-    switch (game_state) {
-    case MAIN_MENU:
-        break;
-
-    case EXPLORATION:
-        if (player -> x == 50)
-            game_state = COMBAT;
-        if (player -> hp <= 0) {
-            player -> hp = 0;
-            game_state = GAME_OVER;
-        }
-        if (player -> y == 21 && map->numMap == 0) {
-            map->numMap = 1;
-            player -> y = 3;
-            player->x = player->x + 2;
-        }
-        if (player->y == 2 && map->numMap == 1) {
-            map->numMap = 0;
-            player->x = player->x - 2;
-            player-> y = 20;
-        }
-        if (player->y == 2 && map->numMap ==0) {
-            map->numMap = 2;
-            player->y = 20;
-        }
-        if (player->y == 21 && map->numMap == 2) {
-            map->numMap = 0;
-            player->y = 3;
-        }
-        break;
-
-    case COMBAT:
-        if (player -> hp <= 0) {
-            player -> hp = 0;
-            game_state = GAME_OVER;
-        }
-        break;
-
-    case GAME_OVER:
-        break;
-
-    case CREDITS:
-        break;
-    }
-   
-}
-
-void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
-    //Pantalla en blanco (falta implementar ui)
-    for (int y = 0; y < height; y++) {
-        for (int x = 0; x < width; x++) {
-            draw(x, y, ' ');
-        }
-    }
-    //Dibuja la parte del juego correspondiente
-    switch (game_state) {
-    case MAIN_MENU:
-        drawMainMenu();
-        break;
-
-    case EXPLORATION:
-        drawUI();
-        //drawMap(map->numMap);
-        map->drawMap(screen);
-        draw(npcs[map->numMap].x, npcs[map->numMap].y, npcs[map->numMap].character);
-        if (player->x == npcs[map->numMap].x && player->y == npcs[map->numMap].y) {
-            draw(6, 24, npcs[map->numMap].name);
-        }
-        draw(chest[map->numMap].x, chest[map->numMap].y, 'C');
-        draw(player -> x, player -> y, '@');
-        break;
-
-    case COMBAT:
-        drawUI();
-        draw(38, 1, "    COMBAT    ");
-        drawCombat();
-        drawEnemy(1);
-        break;
-
-    case GAME_OVER:
-        draw(0, 0, "Game Over");
-        draw(0, 1, "Press SPACE to choose an option");
-        drawGameOver();
-        break;
-
-    case CREDITS:
-        draw(0, 0, "Credits (Work in progress)");
-        draw(0, 1, "Press SPACE to go back");
-        break;
-    }
-}
+*/
