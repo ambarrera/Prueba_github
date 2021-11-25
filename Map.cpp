@@ -25,15 +25,15 @@ Map::Map(int numMap, int cornerX, int cornerY, int playerX, int playerY):
 		std::string fileNameNpc;
 		for (int i = 0; i < numNPCs; i++) {
 			fileNameNpc = filename + std::to_string(i);
-			filename += ".txt";
-			npc[i] = new Npc(filename);
+			fileNameNpc += ".txt";
+			npc[i] = new Npc(fileNameNpc);
 		}
 		break;
 	}
 }
 
 int Map::setUpMap(int numMap) {
-	bool returnValue = 0;
+	int returnValue = 0;
 	std::string filename = "Map";
 	filename += std::to_string(numMap);
 	filename += ".txt";

@@ -2,7 +2,7 @@ Solaire
 35
 17 11
 12
-Oh! Un aventurero!_Hola joven aventurero.
+Oh!_Unaventurero!_Hola joven_aventurero.
 soy Burak, mi familia vino a este bosque hace siglos y les gusto este lugar.
 así que decidieron construir una humilde casa que fue pasando de generación en generación.
 primero perteneció a mi taratara abuelo Biruk luego a su hijo Barok.
