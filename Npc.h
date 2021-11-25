@@ -6,7 +6,7 @@ class Npc :
     public Creature
 {
 public:
-	Npc(char* fileName);
+	Npc(std::string fileName);
 	std::string getLineDialogue(int x);
 
 private:

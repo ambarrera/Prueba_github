@@ -1,7 +1,7 @@
 #include "Npc.h"
 #include <fstream>
 
-Npc::Npc(char* fileName):
+Npc::Npc(std::string fileName):
 	Creature(0, 0, 'N')
 {
 	std::fstream npcFile;

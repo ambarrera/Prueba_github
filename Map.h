@@ -3,24 +3,29 @@
 #include "Npc.h"
 #include "Chest.h"
 
+#include <string>
+
 class Map{
 public:
-    Map(int cornerX, int cornerY, int playerX, int playerY);
+    Map(int numMap, int cornerX, int cornerY, int playerX, int playerY);
     void update();
     void draw(char** screen);
 
     //Objetos
     Player player;
-    Npc* npc;
-    Chest* chest;
+    Npc** npc;
+    Chest** chest;
 
 private:
-	//Variables
+	//Atributos
+    std::string name;
     int width;
     int height;
     int cornerX;
     int cornerY;
+    int numNPCs;
+    int numChests;
     char** map;
 
-    void setUpMap();
+    int setUpMap(int numMap);
 };

@@ -1,25 +1,68 @@
 #include "Map.h"
 #include <fstream>
 
-Map::Map(int cornerX, int cornerY, int playerX, int playerY):
+Map::Map(int numMap, int cornerX, int cornerY, int playerX, int playerY):
 	player(playerX, playerY, '@')
 {
 	this->cornerX = cornerX;
 	this->cornerY = cornerY;
-	npc = new Npc("Npc0.txt");
-	chest = new Chest(1, 0, 'C');
-	setUpMap();
+	numNPCs = setUpMap(numMap);
+	std::string filename = "Npc";
+	filename += std::to_string(numMap);
+	switch (numNPCs)
+	{
+	case 0:
+		npc = nullptr;
+		break;
+	case 1:
+		filename += ".txt";
+		npc = new Npc * [numNPCs];
+		npc[0] = new Npc(filename);
+		break;
+	default:
+		filename += "-";
+		npc = new Npc * [numNPCs];
+		std::string fileNameNpc;
+		for (int i = 0; i < numNPCs; i++) {
+			fileNameNpc = filename + std::to_string(i);
+			filename += ".txt";
+			npc[i] = new Npc(filename);
+		}
+		break;
+	}
 }
 
-void Map::setUpMap() {
+int Map::setUpMap(int numMap) {
+	bool returnValue = 0;
+	std::string filename = "Map";
+	filename += std::to_string(numMap);
+	filename += ".txt";
 	std::fstream mapFile;
-	mapFile.open("Map0.txt", std::ios::in);
+	mapFile.open(filename, std::ios::in);
 	if (mapFile.is_open()) {
+		std::getline(mapFile, name);
 		int num;
 		mapFile >> num;
 		this->width = num;
 		mapFile >> num;
 		this->height = num;
+		mapFile >> num;
+		returnValue = num;
+		mapFile >> num;
+		numChests = num;
+		if (num) {
+			int chestX;
+			int chestY;
+			chest = new Chest * [num];
+			for (int i = 0; i < num; i++) {
+				mapFile >> chestX;
+				mapFile >> chestY;
+				chest[i] = new Chest(chestX, chestY, 'C');
+			}
+		}
+		else {
+			chest = nullptr;
+		}
 		map = new char* [height];
 		for (int i = 0; i < height; i++) {
 			map[i] = new char[width];
@@ -32,15 +75,16 @@ void Map::setUpMap() {
 		}
 		mapFile.close();
 	}
+	return returnValue;
 }
 
 void Map::update() {
 	player.update();
-	for (int i = 0; i < sizeof(npc); i++) {
-		npc[i].update();
+	for (int i = 0; i < numNPCs; i++) {
+		npc[i]->update();
 	}
-	for (int i = 0; i < sizeof(chest); i++) {
-		chest[i].update();
+	for (int i = 0; i < numChests; i++) {
+		chest[i]->update();
 	}
 }
 
@@ -53,10 +97,10 @@ void Map::draw(char** screen) {
 	}
 	//Objects
 	player.draw(screen, cornerX, cornerY);
-	for (int i = 0; i < 1; i++) {
-		npc[i].draw(screen, cornerX, cornerY);
+	for (int i = 0; i < numNPCs; i++) {
+		npc[i]->draw(screen, cornerX, cornerY);
 	}
-	for (int i = 0; i < 1; i++) {
-		chest[i].draw(screen, cornerX, cornerY);
+	for (int i = 0; i < numChests; i++) {
+		chest[i]->draw(screen, cornerX, cornerY);
 	}
 }
