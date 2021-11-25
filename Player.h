@@ -7,7 +7,9 @@ class Player:
 public:
 	Player(int x, int y, char symbol);
 	void update();
+	void draw(char** screen, int cornerX, int cornerY);
 
 private:
 	void handleInput();
+	int lastPosX, lastPosY;
 };

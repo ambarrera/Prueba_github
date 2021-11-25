@@ -2,7 +2,11 @@
 #include <Windows.h>
 
 Player::Player(int x, int y, char symbol):
-	Creature(x, y, symbol) {}
+	Creature(x, y, symbol)
+{
+	lastPosX = x;
+	lastPosY = y;
+}
 
 void Player::handleInput() {
 	if (GetAsyncKeyState('A') & 0x8000) {
@@ -20,5 +24,15 @@ void Player::handleInput() {
 }
 
 void Player::update() {
+	lastPosX = x;
+	lastPosY = y;
 	handleInput();
+}
+
+void Player::draw(char** screen, int cornerX, int cornerY) {
+	if (screen[y + cornerY][x + cornerX] != char(32)) {
+		x = lastPosX;
+		y = lastPosY;
+	}
+	screen[y + cornerY][x + cornerX] = symbol;
 }

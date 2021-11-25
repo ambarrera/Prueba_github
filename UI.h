@@ -4,12 +4,10 @@
 class UI
 {
 public:
-	UI(int dialogueX, int dialogueY);
-	void displayDialogue(char** screen, std::string line);
+	UI();
 	void draw(char** screen);
 
-private:
-	int dialogueX, dialogueY;
+protected:
 	void drawOnScreen(char** screen, int x, int y, char symbol);
 	void drawOnScreen(char** screen, int x, int y, char* line);
 	void drawOnScreen(char** screen, int x, int y, int num);

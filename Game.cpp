@@ -4,13 +4,13 @@
 #include <iostream>
 
 Game::Game(int screenWidth, int screenHeight, int playerHp, int playerX, int playerY):
-    map(0, 5, 2, 0, 9), ui(6, 24)
+    map(0, 5, 2, 0, 9), mainUI(6, 24), mainMenu()
 {
     //Variables
     running = true;
     height = screenHeight;
     width = screenWidth;
-    game_state = MAIN_MENU;
+    game_state = GameState::MAIN_MENU;
 
     //Configuración de pantalla
     setUpScreen();
@@ -38,13 +38,73 @@ void Game::run() {
 }
 
 void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
-    map.update();
+    switch (game_state)
+    {
+    case GameState::MAIN_MENU:
+        switch (mainMenu.update()) {
+        case 0:
+            changeGameState(GameState::EXPLORATION);
+            break;
+        case 1:
+            changeGameState(GameState::EXPLORATION);
+            break;
+        case 2:
+            changeGameState(GameState::CREDITS);
+            break;
+        case 3:
+            running = false;
+            break;
+        }
+        break;
+    case GameState::EXPLORATION:
+        map.update();
+        break;
+    case GameState::COMBAT:
+        //nose aún
+        break;
+    case GameState::GAME_OVER:
+        //nose aún
+        break;
+    case GameState::CREDITS:
+        //nose aún
+        break;
+    default:
+        break;
+    }
 }
 
 void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
-    ui.draw(screen);
-    ui.displayDialogue(screen, map.npc[0]->getLineDialogue(0));
-    map.draw(screen);
+    switch (game_state)
+    {
+    case GameState::MAIN_MENU:
+        mainMenu.draw(screen);
+        break;
+    case GameState::EXPLORATION:
+        mainUI.draw(screen);
+        mainUI.displayDialogue(screen, map.npc[0]->getLineDialogue(0));
+        map.draw(screen);
+        break;
+    case GameState::COMBAT:
+        //nose aún
+        break;
+    case GameState::GAME_OVER:
+        //nose aún
+        break;
+    case GameState::CREDITS:
+        //nose aún
+        break;
+    default:
+        break;
+    }
+}
+
+void Game::changeGameState(GameState newstate) {
+    for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+            screen[y][x] = ' ';
+        }
+    }
+    game_state = newstate;
 }
 
 void Game::renderScreen() {

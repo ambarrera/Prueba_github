@@ -96,11 +96,11 @@ void Map::draw(char** screen) {
 		}
 	}
 	//Objects
-	player.draw(screen, cornerX, cornerY);
 	for (int i = 0; i < numNPCs; i++) {
 		npc[i]->draw(screen, cornerX, cornerY);
 	}
 	for (int i = 0; i < numChests; i++) {
 		chest[i]->draw(screen, cornerX, cornerY);
 	}
+	player.draw(screen, cornerX, cornerY);
 }

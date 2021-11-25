@@ -1,6 +1,7 @@
 #pragma once
 #include "Map.h"
-#include "UI.h"
+#include "MainUI.h"
+#include "MainMenu.h"
 
 #include <Windows.h>
 
@@ -28,7 +29,7 @@ private:
     void setUpScreen();
 
     //Enum del estado del juego
-    enum GameStates {
+    enum class GameState {
         MAIN_MENU,
         EXPLORATION,
         COMBAT,
@@ -36,9 +37,12 @@ private:
         CREDITS
     };
 
-    GameStates game_state;
+    GameState game_state;
 
     //Objetos y actores del juego
     Map map;
-    UI ui;
+    MainUI mainUI;
+    MainMenu mainMenu;
+
+    void changeGameState(GameState newState);
 };

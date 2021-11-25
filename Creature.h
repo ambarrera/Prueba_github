@@ -14,6 +14,6 @@ protected:
 		UP, 
 		DOWN
 	};
-	//Variables
+
 	void move(Direction direction);
 };
