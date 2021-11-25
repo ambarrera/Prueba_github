@@ -63,6 +63,28 @@ int Map::setUpMap(int numMap) {
 		else {
 			chest = nullptr;
 		}
+		//Teleporter
+		mapFile >> num;
+		numTeleporters = num;
+		if (num) {
+			int teleporterX;
+			int teleporterY;
+			int newMap;
+			int newPlayerX;
+			int newPlayerY;
+			teleporter = new Teleporter * [num];
+			for (int i = 0; i < num; i++) {
+				mapFile >> teleporterX;
+				mapFile >> teleporterY;
+				mapFile >> newMap;
+				mapFile >> newPlayerX;
+				mapFile >> newPlayerY;
+				teleporter[i] = new Teleporter(teleporterX, teleporterY, newMap, newPlayerX, newPlayerY);
+			}
+		}
+		else {
+			teleporter = nullptr;
+		}
 		map = new char* [height];
 		for (int i = 0; i < height; i++) {
 			map[i] = new char[width];
@@ -78,13 +100,24 @@ int Map::setUpMap(int numMap) {
 	return returnValue;
 }
 
-void Map::update() {
-	player.update();
+void Map::update(int* newMapNum, int* newPlayerX, int* newPLayerY) {
+	*(newMapNum) = -1;
+	*(newPlayerX) = 0;
+	*(newPLayerY) = 0;
+	int typeOfObject;
+	int numObject;
+	checkInteractions(&typeOfObject, &numObject);
+	player.update(typeOfObject);
 	for (int i = 0; i < numNPCs; i++) {
 		npc[i]->update();
 	}
 	for (int i = 0; i < numChests; i++) {
 		chest[i]->update();
+	}
+	if (typeOfObject == 3) {
+		*(newMapNum) = teleporter[numObject]->newMap;
+		*(newPlayerX) = teleporter[numObject]->newPlayerX;
+		*(newPLayerY) = teleporter[numObject]->newPlayerY;
 	}
 }
 
@@ -102,5 +135,58 @@ void Map::draw(char** screen) {
 	for (int i = 0; i < numChests; i++) {
 		chest[i]->draw(screen, cornerX, cornerY);
 	}
+	for (int i = 0; i < numTeleporters; i++) {
+		teleporter[i]->draw(screen, cornerX, cornerY);
+	}
 	player.draw(screen, cornerX, cornerY);
+}
+
+void Map::checkInteractions(int* typeOfObject, int* numObject) {
+	*(typeOfObject) = 0;
+	*(numObject) = 0;
+	int playerX, playerY;
+	player.getCoordinates(&playerX, &playerY);
+	//Check npcs
+	int npcX, npcY;
+	for (int i = 0; i < numNPCs; i++) {
+		npc[i]->getCoordinates(&npcX, &npcY);
+		if (playerX == npcX) {
+			if (playerY == npcY - 1 || playerY == npcY + 1) {
+				*(typeOfObject) = 1;
+				*(numObject) = i;
+			}
+		}
+		else if (playerY == npcY) {
+			if (playerX == npcX - 1 || playerX == npcX + 1) {
+				*(typeOfObject) = 1;
+				*(numObject) = i;
+			}
+		}
+	}
+	//Check chests
+	int chestX, chestY;
+	for (int i = 0; i < numChests; i++) {
+		chest[i]->getCoordinates(&chestX, &chestY);
+		if (playerX == chestX) {
+			if (playerY == chestY - 1 || playerY == chestY + 1) {
+				*(typeOfObject) = 2;
+				*(numObject) = i;
+			}
+		}
+		else if (playerY == chestY) {
+			if (playerX == chestX - 1 || playerX == chestX + 1) {
+				*(typeOfObject) = 2;
+				*(numObject) = i;
+			}
+		}
+	}
+	//Check teleporters
+	int teleporterX, telerporterY;
+	for (int i = 0; i < numTeleporters; i++) {
+		teleporter[i]->getCoordinates(&teleporterX, &telerporterY);
+		if (playerX == teleporterX && playerY == telerporterY) {
+			*(typeOfObject) = 3;
+			*(numObject) = i;
+		}
+	}
 }

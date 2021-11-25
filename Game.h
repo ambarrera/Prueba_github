@@ -8,7 +8,7 @@
 class Game {
 public:
     //Constructor
-    Game(int screenWidth, int screenHeight, int playerHp, int playerX, int playerY);
+    Game(int screenWidth, int screenHeight, int numMaps);
 
     //Métodos
     void run();
@@ -23,6 +23,7 @@ private:
     bool running;
     int width;
     int height;
+    int numMap;
 
     //Variables privadas y funcion para configurar la pantalla
     char** screen;
@@ -40,9 +41,10 @@ private:
     GameState game_state;
 
     //Objetos y actores del juego
-    Map map;
+    Map** map;
     MainUI mainUI;
     MainMenu mainMenu;
 
     void changeGameState(GameState newState);
+    void changeMap(int newMapNum, int newPlayerX, int newPlayerY);
 };

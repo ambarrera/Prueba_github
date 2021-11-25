@@ -7,6 +7,11 @@ Object::Object(int x, int y, char symbol, bool isSolid) {
 	this->isSolid = isSolid;
 }
 
+void Object::getCoordinates(int* x, int* y) {
+	*(x) = this->x;
+	*(y) = this->y;
+}
+
 void Object::setCoordinates(int x, int y) {
 	this->x = x;
 	this->y = y;

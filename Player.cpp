@@ -8,7 +8,7 @@ Player::Player(int x, int y, char symbol):
 	lastPosY = y;
 }
 
-void Player::handleInput() {
+void Player::handleInput(bool isAbleToInteract) {
 	if (GetAsyncKeyState('A') & 0x8000) {
 		move(Direction::LEFT);
 	}
@@ -21,16 +21,19 @@ void Player::handleInput() {
 	else if (GetAsyncKeyState('S') & 0x8000) {
 		move(Direction::DOWN);
 	}
+	else if (isAbleToInteract && GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		setCoordinates(40, 9);
+	}
 }
 
-void Player::update() {
+void Player::update(bool isAbleToInteract) {
 	lastPosX = x;
 	lastPosY = y;
-	handleInput();
+	handleInput(isAbleToInteract);
 }
 
 void Player::draw(char** screen, int cornerX, int cornerY) {
-	if (screen[y + cornerY][x + cornerX] != char(32)) {
+	if (screen[y + cornerY][x + cornerX] != char(32) && screen[y + cornerY][x + cornerX] != char(179)) {
 		x = lastPosX;
 		y = lastPosY;
 	}

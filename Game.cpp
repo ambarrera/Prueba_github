@@ -3,14 +3,20 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game(int screenWidth, int screenHeight, int playerHp, int playerX, int playerY):
-    map(0, 5, 2, 0, 9), mainUI(6, 24), mainMenu()
+Game::Game(int screenWidth, int screenHeight, int numMaps):
+    mainUI(6, 24), mainMenu()
 {
     //Variables
     running = true;
     height = screenHeight;
     width = screenWidth;
+    numMap = 0;
     game_state = GameState::MAIN_MENU;
+    //Maps
+    map = new Map * [numMaps];
+    for (int i = 0; i < numMaps; i++) {
+        map[i] = new Map(i, 5, 2, 3, 10);
+    }
 
     //Configuración de pantalla
     setUpScreen();
@@ -57,7 +63,13 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         }
         break;
     case GameState::EXPLORATION:
-        map.update();
+        int newMapNum;
+        int newPlayerX;
+        int newPlayerY;
+        map[numMap]->update(&newMapNum, &newPlayerX, &newPlayerY);
+        if (newMapNum != -1) {
+            changeMap(newMapNum, newPlayerX, newPlayerY);
+        }
         break;
     case GameState::COMBAT:
         //nose aún
@@ -81,8 +93,10 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         break;
     case GameState::EXPLORATION:
         mainUI.draw(screen);
-        mainUI.displayDialogue(screen, map.npc[0]->getLineDialogue(0));
-        map.draw(screen);
+        if (map[numMap]->npc != nullptr) {
+            mainUI.displayDialogue(screen, map[numMap]->npc[0]->getLineDialogue(0));
+        }
+        map[numMap]->draw(screen);
         break;
     case GameState::COMBAT:
         //nose aún
@@ -105,6 +119,11 @@ void Game::changeGameState(GameState newstate) {
         }
     }
     game_state = newstate;
+}
+
+void Game::changeMap(int newMapNum, int newPlayerX, int newPlayerY) {
+    numMap = newMapNum;
+    map[numMap]->player.setCoordinates(newPlayerX, newPlayerY);
 }
 
 void Game::renderScreen() {
