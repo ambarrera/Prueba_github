@@ -7,6 +7,7 @@ class Npc :
 {
 public:
 	Npc(std::string fileName);
+	~Npc();
 	std::string getLineDialogue(int x);
 
 	int numLines;

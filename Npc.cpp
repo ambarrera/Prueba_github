@@ -29,6 +29,10 @@ Npc::Npc(std::string fileName):
 	}
 }
 
+Npc::~Npc() {
+	delete[] dialogue;
+}
+
 std::string Npc::getLineDialogue(int numLine) {
 	return dialogue[numLine];
 }

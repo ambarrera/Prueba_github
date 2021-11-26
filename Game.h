@@ -9,7 +9,7 @@ class Game {
 public:
     //Constructor
     Game(int screenWidth, int screenHeight, int numMaps);
-
+    ~Game();
     //Métodos
     void run();
 

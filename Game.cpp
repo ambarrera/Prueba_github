@@ -22,6 +22,11 @@ Game::Game(int screenWidth, int screenHeight, int numMaps):
     setUpScreen();
 }
 
+Game::~Game() {
+    delete[] screen;
+    delete[] map;
+}
+
 void Game::setUpScreen() {
     screen = new char*[height];
     for (int i = 0; i < height; i++) {

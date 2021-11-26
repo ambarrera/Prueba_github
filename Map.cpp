@@ -32,6 +32,12 @@ Map::Map(int numMap, int cornerX, int cornerY, int playerX, int playerY):
 	}
 }
 
+Map::~Map() {
+	delete[] npc;
+	delete[] chest;
+	delete[] teleporter;
+}
+
 int Map::setUpMap(int numMap) {
 	int returnValue = 0;
 	std::string filename = "Map";
