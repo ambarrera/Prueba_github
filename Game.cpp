@@ -66,9 +66,24 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         int newMapNum;
         int newPlayerX;
         int newPlayerY;
-        map[numMap]->update(&newMapNum, &newPlayerX, &newPlayerY);
+        int typeOfObject;
+        int numObject;
+        map[numMap]->update(&newMapNum, &newPlayerX, &newPlayerY, &typeOfObject, &numObject);
         if (newMapNum != -1) {
             changeMap(newMapNum, newPlayerX, newPlayerY);
+        }
+        cleanScreen(24, 25, 26);
+        if (map[numMap]->player.isInteracting) {
+            switch (typeOfObject)
+            {
+            case 1:
+                mainUI.displayDialogue(screen, map[numMap]->npc[numObject]->getLineDialogue(map[numMap]->npc[numObject]->numLines - (map[numMap]->player.isInteracting)));
+                break;
+            case 2:
+                mainUI.displayDialogue(screen, "You found a chest, it contains... a potion!_One potion has been added to your inventory");
+            default:
+                break;
+            }
         }
         break;
     case GameState::COMBAT:
@@ -93,9 +108,6 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         break;
     case GameState::EXPLORATION:
         mainUI.draw(screen);
-        if (map[numMap]->npc != nullptr) {
-            mainUI.displayDialogue(screen, map[numMap]->npc[0]->getLineDialogue(0));
-        }
         map[numMap]->draw(screen);
         break;
     case GameState::COMBAT:
@@ -124,6 +136,14 @@ void Game::changeGameState(GameState newstate) {
 void Game::changeMap(int newMapNum, int newPlayerX, int newPlayerY) {
     numMap = newMapNum;
     map[numMap]->player.setCoordinates(newPlayerX, newPlayerY);
+}
+
+void Game::cleanScreen(int a, int b, int c) {
+    for (int i = 0; i < width; i++) {
+        screen[a][i] = ' ';
+        screen[b][i] = ' ';
+        screen[c][i] = ' ';
+    }
 }
 
 void Game::renderScreen() {

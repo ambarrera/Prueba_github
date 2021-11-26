@@ -9,7 +9,7 @@
 class Map{
 public:
     Map(int numMap, int cornerX, int cornerY, int playerX, int playerY);
-    void update(int *newMapNum, int *newPlayerX, int *newPLayerY);
+    void update(int *newMapNum, int *newPlayerX, int *newPLayerY, int *typeOfObject, int *numObject);
     void draw(char** screen);
 
     //Objetos

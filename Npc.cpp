@@ -10,17 +10,18 @@ Npc::Npc(std::string fileName):
 		std::string line;
 		std::getline(npcFile, line);
 		name = line;
-		int numLines;
-		npcFile >> numLines;
-		symbol = char(numLines);
-		npcFile >> numLines;
-		x = numLines;
-		npcFile >> numLines;
-		y = numLines;
-		npcFile >> numLines;
-		dialogue = new std::string[numLines];
+		int num;
+		npcFile >> num;
+		symbol = char(num);
+		npcFile >> num;
+		x = num;
+		npcFile >> num;
+		y = num;
+		npcFile >> num;
+		numLines = num;
+		dialogue = new std::string[num];
 		std::getline(npcFile, line);
-		for (int i = 0; i < numLines; i++) {
+		for (int i = 0; i < num; i++) {
 			std::getline(npcFile, line);
 			dialogue[i] = line;
 		}

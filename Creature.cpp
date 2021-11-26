@@ -1,7 +1,10 @@
 #include "Creature.h"
 
 Creature::Creature(int x, int y, char symbol):
-	Object(x, y, symbol, true) {}
+	Object(x, y, symbol, true)
+{
+	isInteracting = 0;
+}
 
 void Creature::move(Direction direction) {
 	switch (direction) {

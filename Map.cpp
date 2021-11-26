@@ -100,24 +100,34 @@ int Map::setUpMap(int numMap) {
 	return returnValue;
 }
 
-void Map::update(int* newMapNum, int* newPlayerX, int* newPLayerY) {
+void Map::update(int* newMapNum, int* newPlayerX, int* newPLayerY, int* typeOfObject, int* numObject) {
 	*(newMapNum) = -1;
 	*(newPlayerX) = 0;
 	*(newPLayerY) = 0;
-	int typeOfObject;
-	int numObject;
-	checkInteractions(&typeOfObject, &numObject);
-	player.update(typeOfObject);
+	int numInteractions;
+	checkInteractions(typeOfObject, numObject);
+	switch (*(typeOfObject)) {
+	case 1:
+		numInteractions = npc[*(numObject)]->numLines;
+		break;
+	case 2:
+		numInteractions = 1;
+		break;
+	case 3:
+		*(newMapNum) = teleporter[*(numObject)]->newMap;
+		*(newPlayerX) = teleporter[*(numObject)]->newPlayerX;
+		*(newPLayerY) = teleporter[*(numObject)]->newPlayerY;
+		numInteractions = 0;
+	default:
+		numInteractions = 0;
+		break;
+	}
+	player.update(numInteractions);
 	for (int i = 0; i < numNPCs; i++) {
 		npc[i]->update();
 	}
 	for (int i = 0; i < numChests; i++) {
 		chest[i]->update();
-	}
-	if (typeOfObject == 3) {
-		*(newMapNum) = teleporter[numObject]->newMap;
-		*(newPlayerX) = teleporter[numObject]->newPlayerX;
-		*(newPLayerY) = teleporter[numObject]->newPlayerY;
 	}
 }
 

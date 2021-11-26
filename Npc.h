@@ -9,6 +9,8 @@ public:
 	Npc(std::string fileName);
 	std::string getLineDialogue(int x);
 
+	int numLines;
+
 private:
 	//Variables
 	std::string name;

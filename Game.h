@@ -45,6 +45,7 @@ private:
     MainUI mainUI;
     MainMenu mainMenu;
 
+    void cleanScreen(int a, int b, int c);
     void changeGameState(GameState newState);
     void changeMap(int newMapNum, int newPlayerX, int newPlayerY);
 };

@@ -12,7 +12,7 @@ void UI::drawOnScreen(char** screen, int x, int y, char* line) {
     }
 }
 
-void draw(char** screen) {
+void UI::draw(char** screen) {
     //do nothing
 }
 

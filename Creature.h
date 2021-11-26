@@ -7,6 +7,8 @@ class Creature :
 public:
 	Creature(int x, int y, char symbol);
 
+	int isInteracting;
+
 protected:
 	enum class Direction {
 		LEFT,

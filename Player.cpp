@@ -6,30 +6,49 @@ Player::Player(int x, int y, char symbol):
 {
 	lastPosX = x;
 	lastPosY = y;
+	lastPressedEnter = false;
 }
 
-void Player::handleInput(bool isAbleToInteract) {
-	if (GetAsyncKeyState('A') & 0x8000) {
-		move(Direction::LEFT);
+bool Player::handleInput() {
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+		if (!lastPressedEnter) {
+			lastPressedEnter = true;
+			return true;
+		}
 	}
-	else if (GetAsyncKeyState('D') & 0x8000) {
-		move(Direction::RIGHT);
+	else if (!isInteracting) {
+		if (GetAsyncKeyState('A') & 0x8000) {
+			move(Direction::LEFT);
+		}
+		else if (GetAsyncKeyState('D') & 0x8000) {
+			move(Direction::RIGHT);
+		}
+		else if (GetAsyncKeyState('W') & 0x8000) {
+			move(Direction::UP);
+		}
+		else if (GetAsyncKeyState('S') & 0x8000) {
+			move(Direction::DOWN);
+		}
+		lastPressedEnter = false;
 	}
-	else if (GetAsyncKeyState('W') & 0x8000) {
-		move(Direction::UP);
+	else {
+		lastPressedEnter = false;
 	}
-	else if (GetAsyncKeyState('S') & 0x8000) {
-		move(Direction::DOWN);
-	}
-	else if (isAbleToInteract && GetAsyncKeyState(VK_SPACE) & 0x8000) {
-		setCoordinates(40, 9);
-	}
+	return false;
 }
 
-void Player::update(bool isAbleToInteract) {
+void Player::update(int numInteractions) {
 	lastPosX = x;
 	lastPosY = y;
-	handleInput(isAbleToInteract);
+	bool pressedEnter = handleInput();
+	if (!isInteracting) {
+		if (numInteractions && pressedEnter) {
+			isInteracting = numInteractions;
+		}
+	}
+	else if (pressedEnter) {
+		isInteracting--;
+	}
 }
 
 void Player::draw(char** screen, int cornerX, int cornerY) {

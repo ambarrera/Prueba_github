@@ -6,10 +6,11 @@ class Player:
 {
 public:
 	Player(int x, int y, char symbol);
-	void update(bool isAbleToInteract);
+	void update(int numInteractions);
 	void draw(char** screen, int cornerX, int cornerY);
 
 private:
-	void handleInput(bool isAbleToInteract);
+	bool handleInput();
 	int lastPosX, lastPosY;
+	bool lastPressedEnter;
 };
