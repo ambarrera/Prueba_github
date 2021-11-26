@@ -1,21 +1,10 @@
 Solaire
 35
 17 11
-12
-Ah, hola No pareces de por aqui_
-Mi nombre es solaire de los reinos lejanos de Astora._
-Llegue hace tiempo a este bosque con un grupo de companeros._
-
-Para hacer una mision encargada por el rey, pero todo se nos complico._
-Mis companeros murieron y solo quedo yo, desde entonces sigo buscando una salid_
-Dejame darte informacion de este lugar para que no cometas los mismos errores_
-
-Este bosque esta repleto de seres que querran quitarte tu alma._
-mientras mas profundo te adentres en el mas fuerte seran las criaturas_
-para poder enfrentarte a ellas deberas estar bien equipado pero no te preocupes._
-
-en el bosque hay escondidos algunos cofres que te daran objetos para ayudarte_
-tambien seguramente encontraras a mas personas como yo que puedan brindarte
-alguna informacion Probablemente nos volvamos a ver, te deseo suerte en tu viaje._    
+4
+Ah, hi. You don't seem from around here_My name is solaire from the distant realms of Astora._I arrived long ago in this forest with a group of companions._
+To do a mission commissioned by the king, but everything got complicated for us_My companions died and only I remained, since then I keep looking for a way out_Let me give you information about this place so you don't make the same mistakes_
+This forest is full of beings who want to take your soul away_the deeper you go the stronger the creatures will be_To be able to face them you should be well equipped but don't worry._
+in the forest there are hidden some chests that will give you objects to help you_You will also surely find more people like me who can offer you some_ information will probably see each other again, I wish you luck on your trip_
 
 
