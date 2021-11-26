@@ -11,6 +11,7 @@ Game::Game(int screenWidth, int screenHeight, int numMaps):
     height = screenHeight;
     width = screenWidth;
     numMap = 0;
+    maxMaps = numMaps;
     game_state = GameState::MAIN_MENU;
     //Maps
     map = new Map * [numMaps];
@@ -23,8 +24,14 @@ Game::Game(int screenWidth, int screenHeight, int numMaps):
 }
 
 Game::~Game() {
-    delete[] screen;
+    for (int i = 0; i < maxMaps; i++) {
+        delete map[i];
+    }
     delete[] map;
+    for (int i = 0; i < height; i++) {
+        delete[] screen[i];
+    }
+    delete[] screen;
 }
 
 void Game::setUpScreen() {

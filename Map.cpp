@@ -33,8 +33,17 @@ Map::Map(int numMap, int cornerX, int cornerY, int playerX, int playerY):
 }
 
 Map::~Map() {
+	for (int i = 0; i < numNPCs; i++) {
+		delete npc[i];
+	}
 	delete[] npc;
+	for (int i = 0; i < numChests; i++) {
+		delete chest[i];
+	}
 	delete[] chest;
+	for (int i = 0; i < numTeleporters; i++) {
+		delete teleporter[i];
+	}
 	delete[] teleporter;
 }
 

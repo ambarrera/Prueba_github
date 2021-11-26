@@ -10,6 +10,7 @@ public:
     //Constructor
     Game(int screenWidth, int screenHeight, int numMaps);
     ~Game();
+
     //Métodos
     void run();
 
@@ -24,6 +25,7 @@ private:
     int width;
     int height;
     int numMap;
+    int maxMaps;
 
     //Variables privadas y funcion para configurar la pantalla
     char** screen;
