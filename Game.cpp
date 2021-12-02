@@ -4,7 +4,7 @@
 #include <iostream>
 
 Game::Game(int screenWidth, int screenHeight, int numMaps):
-    mainUI(6, 24), mainMenu()
+    mainUI(6, 24), mainMenu(), battleBoard(3, 9)
 {
     //Variables
     running = true;
@@ -97,9 +97,16 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
                 break;
             }
         }
+        //Prueba
+        int playerX;
+        int playerY;
+        map[numMap]->player.getCoordinates(&playerX, &playerY);
+        if (playerX > 20) {
+            game_state = GameState::COMBAT;
+        }
         break;
     case GameState::COMBAT:
-        //nose aún
+        battleBoard.update();
         break;
     case GameState::GAME_OVER:
         //nose aún
@@ -123,7 +130,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         map[numMap]->draw(screen);
         break;
     case GameState::COMBAT:
-        //nose aún
+        battleBoard.draw(screen);
         break;
     case GameState::GAME_OVER:
         //nose aún

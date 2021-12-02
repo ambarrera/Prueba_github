@@ -2,6 +2,7 @@
 #include "Map.h"
 #include "MainUI.h"
 #include "MainMenu.h"
+#include "BattleBoard.h"
 
 #include <Windows.h>
 
@@ -46,6 +47,7 @@ private:
     Map** map;
     MainUI mainUI;
     MainMenu mainMenu;
+    BattleBoard battleBoard;
 
     void cleanScreen(int a, int b, int c);
     void changeGameState(GameState newState);
