@@ -1,10 +1,11 @@
 Solaire
 35
 17 11
-4
-Ah, hi. You don't seem from around here_My name is solaire from the distant realms of Astora._I arrived long ago in this forest with a group of companions._
-To do a mission commissioned by the king, but everything got complicated for us_My companions died and only I remained, since then I keep looking for a way out_Let me give you information about this place so you don't make the same mistakes_
-This forest is full of beings who want to take your soul away_the deeper you go the stronger the creatures will be_To be able to face them you should be well equipped but don't worry._
-in the forest there are hidden some chests that will give you objects to help you_You will also surely find more people like me who can offer you some_ information will probably see each other again, I wish you luck on your trip_
+5
+Ah, hi. You don't seem from around here._My name is Solaire from the distant realms of Astora._I arrived long ago in this forest with a group of companions_
+to complete a mission commissioned by the king. But everything got complicated_for us. My companions died and only I remained, since then I keep looking for_a way out._
+Let me give you information about this place so you don't make the same_mistakes.This forest is full of beings who want to take your soul away,_the deeper you go the stronger the creatures will be._
+To be able to face them you should be well equipped but don't worry_there are hidden chests in the forest that will give you helpful objects._
+You will also surely find more people like me who can offer you some_information. We will probably see each other again, I wish you luck_on your trip.
 
 
