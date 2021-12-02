@@ -45,6 +45,10 @@ Map::~Map() {
 		delete teleporter[i];
 	}
 	delete[] teleporter;
+	for (int i = 0; i < height; i++) {
+		delete[] map[i];
+	}
+	delete[] map;
 }
 
 int Map::setUpMap(int numMap) {
