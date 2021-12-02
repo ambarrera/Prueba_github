@@ -37,9 +37,9 @@ void BattlePlayer::handleInput() {
 			lastAction = Action::PRESSED_J;
 		}
 	}
-	else if (GetAsyncKeyState('S') & 0x8000) {
-		if (lastAction != Action::PRESSED_J) {
-			lastAction = Action::PRESSED_J;
+	else if (GetAsyncKeyState('K') & 0x8000) {
+		if (lastAction != Action::PRESSED_K) {
+			lastAction = Action::PRESSED_K;
 		}
 	}
 	else {
