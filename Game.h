@@ -49,7 +49,7 @@ private:
     MainMenu mainMenu;
     BattleBoard battleBoard;
 
-    void cleanScreen(int a, int b, int c);
+    void cleanScreen(int a);
     void changeGameState(GameState newState);
     void changeMap(int newMapNum, int newPlayerX, int newPlayerY);
 };

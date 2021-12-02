@@ -59,5 +59,9 @@ void BattlePlayer::draw(int** battleBoard, int boardRows, int boardColumns) {
 		battleX = lastBattleX;
 		battleY = lastBattleY;
 	}
+	if (battleBoard[battleY][battleX] == 2) {
+		battleX = lastBattleX;
+		battleY = lastBattleY;
+	}
 	battleBoard[battleY][battleX] = 1;
 }

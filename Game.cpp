@@ -4,7 +4,7 @@
 #include <iostream>
 
 Game::Game(int screenWidth, int screenHeight, int numMaps):
-    mainUI(6, 24), mainMenu(), battleBoard(3, 9)
+    mainUI(6, 24), mainMenu(), battleBoard(3, 6)
 {
     //Variables
     running = true;
@@ -84,7 +84,9 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         if (newMapNum != -1) {
             changeMap(newMapNum, newPlayerX, newPlayerY);
         }
-        cleanScreen(24, 25, 26);
+        for (int i = 0; i < 3; i++) {
+            cleanScreen(24 + i);
+        }
         if (map[numMap]->player.isInteracting) {
             switch (typeOfObject)
             {
@@ -102,6 +104,9 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         int playerY;
         map[numMap]->player.getCoordinates(&playerX, &playerY);
         if (playerX > 20) {
+            for (int i = 0; i < 20; i++) {
+                cleanScreen(i + 2);
+            }
             game_state = GameState::COMBAT;
         }
         break;
@@ -130,6 +135,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         map[numMap]->draw(screen);
         break;
     case GameState::COMBAT:
+        mainUI.draw(screen);
         battleBoard.draw(screen);
         break;
     case GameState::GAME_OVER:
@@ -157,11 +163,9 @@ void Game::changeMap(int newMapNum, int newPlayerX, int newPlayerY) {
     map[numMap]->player.setCoordinates(newPlayerX, newPlayerY);
 }
 
-void Game::cleanScreen(int a, int b, int c) {
+void Game::cleanScreen(int a) {
     for (int i = 0; i < width; i++) {
         screen[a][i] = ' ';
-        screen[b][i] = ' ';
-        screen[c][i] = ' ';
     }
 }
 
