@@ -6,7 +6,7 @@ class BattlePlayer :
 {
 public:
     BattlePlayer(int x, int y);
-	void draw(int** battleBoard, int boardRows, int boardColumns);
+	void drawOnBoard(int** battleBoard, int boardRows, int boardColumns);
 	void update();
 
 private:
@@ -22,5 +22,6 @@ private:
 
 	Action lastAction;
     void handleInput();
+	void attack();
 
 };

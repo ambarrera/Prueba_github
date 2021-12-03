@@ -28,8 +28,8 @@ BattleBoard::~BattleBoard() {
 void BattleBoard::update() {
 	enemy.update();
 	player.update();
-	enemy.draw(board, rows, columns);
-	player.draw(board, rows, columns);
+	enemy.drawOnBoard(board, rows, columns);
+	player.drawOnBoard(board, rows, columns);
 }
 
 void BattleBoard::draw(char** screen) {
@@ -66,32 +66,12 @@ void BattleBoard::draw(char** screen) {
 				screen[baseY][baseX + 1] = ' ';
 				break;
 			case 1:
-				screen[baseY - 2][baseX - 2] = '|';
-				screen[baseY - 2][baseX] = 'o';
-				screen[baseY - 1][baseX - 2] = char(197);
-				screen[baseY - 1][baseX - 1] = '/';
-				screen[baseY - 1][baseX] = '|';
-				screen[baseY - 1][baseX + 1] = '\\';
-				screen[baseY][baseX - 1] = '/';
-				screen[baseY][baseX + 1] = '\\';
+				player.drawOnScreen(screen, baseY, baseX);
 				break;
 			case 2:
-				screen[baseY - 3][baseX - 1] = char(200);
-				screen[baseY - 3][baseX] = char(233);
-				screen[baseY - 3][baseX + 1] = char(188);
-				screen[baseY - 2][baseX - 2] = '/';
-				screen[baseY - 2][baseX - 1] = '|';
-				screen[baseY - 2][baseX] = ' ';
-				screen[baseY - 2][baseX + 1] = '|';
-				screen[baseY - 2][baseX + 2] = '\\';
-				screen[baseY - 1][baseX - 1] = '|';
-				screen[baseY - 1][baseX] = '_';
-				screen[baseY - 1][baseX + 1] = '|';
-				screen[baseY][baseX - 1] = char(217);
-				screen[baseY][baseX + 1] = char(192);
+				enemy.drawOnScreen(screen, baseY, baseX);
 				break;
 			}
-			//screen[offY + 3 * y + 2][offX + 10 * x + 5] = board[y][x] + 39;
 		}
 	}
 }

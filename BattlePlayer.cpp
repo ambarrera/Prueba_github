@@ -2,9 +2,20 @@
 #include <Windows.h>
 
 BattlePlayer::BattlePlayer(int x, int y) :
-	BattleObject(1, x, y, 100, 30, 20)
+	BattleObject(1, x, y, 100, 30, 20, 8)
 {
 	lastAction = Action::NOTHING;
+
+	char newChars[8] = { '|', 'o', 197, '/', '|', '\\', '/', '\\'};
+
+	int newCoordY[8] = { -2, -2, -1, -1, -1, -1, 0, 0 };
+	int newCoordX[8] = { -2, 0, -2, -1, 0, 1, -1, 1 };
+
+	for (int i = 0; i < numChars; i++) {
+		chars[i] = newChars[i];
+		charPos[i][0] = newCoordY[i];
+		charPos[i][1] = newCoordX[i];
+	}
 }
 
 void BattlePlayer::handleInput() {
@@ -34,6 +45,7 @@ void BattlePlayer::handleInput() {
 	}
 	else if (GetAsyncKeyState('J') & 0x8000) {
 		if (lastAction != Action::PRESSED_J) {
+			//attack();
 			lastAction = Action::PRESSED_J;
 		}
 	}
@@ -53,7 +65,7 @@ void BattlePlayer::update() {
 	handleInput();
 }
 
-void BattlePlayer::draw(int** battleBoard, int boardRows, int boardColumns) {
+void BattlePlayer::drawOnBoard(int** battleBoard, int boardRows, int boardColumns) {
 	battleBoard[lastBattleY][lastBattleX] = 0;
 	if (battleY >= boardRows || battleX >= boardColumns || battleY < 0 || battleX < 0) {
 		battleX = lastBattleX;
@@ -64,4 +76,8 @@ void BattlePlayer::draw(int** battleBoard, int boardRows, int boardColumns) {
 		battleY = lastBattleY;
 	}
 	battleBoard[battleY][battleX] = 1;
+}
+
+void BattlePlayer::attack() {
+
 }
