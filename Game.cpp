@@ -172,9 +172,13 @@ void Game::cleanScreen(int a) {
 void Game::renderScreen() {
     //screen[width * height - 1] = '\0';
     system("CLS");
-    for (int y = 0; y < height; y++) {
+    for (int y = 0; y < height - 1; y++) {
         for (int x = 0; x < width; x++) {
             std::cout << screen[y][x];
         }
+        std::cout << std::endl;
+    }
+    for (int x = 0; x < width; x++) {
+        std::cout << screen[height - 1][x];
     }
 }

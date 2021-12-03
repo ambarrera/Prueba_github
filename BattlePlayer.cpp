@@ -45,7 +45,7 @@ void BattlePlayer::handleInput() {
 	}
 	else if (GetAsyncKeyState('J') & 0x8000) {
 		if (lastAction != Action::PRESSED_J) {
-			//attack();
+			attack();
 			lastAction = Action::PRESSED_J;
 		}
 	}
@@ -63,6 +63,16 @@ void BattlePlayer::update() {
 	lastBattleX = battleX;
 	lastBattleY = battleY;
 	handleInput();
+	if (lastAction == Action::PRESSED_J) {
+		chars[0] = '.';
+		chars[2] = char(196);
+		chars[3] = char(196);
+		chars[4] = '\\';
+		chars[5] = char(197);
+		charPos[0][1] = 1;
+		charPos[2][1] = 2;
+		charPos[3][1] = 3;
+	}
 }
 
 void BattlePlayer::drawOnBoard(int** battleBoard, int boardRows, int boardColumns) {

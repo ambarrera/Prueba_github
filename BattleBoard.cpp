@@ -1,7 +1,7 @@
 #include "BattleBoard.h"
 
 BattleBoard::BattleBoard(int boardRows, int boardColumns) :
-	enemy(2, 3, 0, 50, 15, 10), player(0, 0)
+	enemy(2, 2, 0, 50, 15, 10), player(0, 0), npc(3, 4, 1, 50, 20, 10)
 {
 	frames = 0;
 	rows = boardRows;
@@ -28,8 +28,10 @@ BattleBoard::~BattleBoard() {
 void BattleBoard::update() {
 	enemy.update();
 	player.update();
+	npc.update();
 	enemy.drawOnBoard(board, rows, columns);
 	player.drawOnBoard(board, rows, columns);
+	npc.drawOnBoard(board, rows, columns);
 }
 
 void BattleBoard::draw(char** screen) {
@@ -61,6 +63,8 @@ void BattleBoard::draw(char** screen) {
 				screen[baseY - 1][baseX - 1] = ' ';
 				screen[baseY - 1][baseX] = ' ';
 				screen[baseY - 1][baseX + 1] = ' ';
+				screen[baseY - 1][baseX + 2] = ' ';
+				screen[baseY - 1][baseX + 3] = ' ';
 				screen[baseY][baseX - 1] = ' ';
 				screen[baseY][baseX] = ' ';
 				screen[baseY][baseX + 1] = ' ';
@@ -70,6 +74,9 @@ void BattleBoard::draw(char** screen) {
 				break;
 			case 2:
 				enemy.drawOnScreen(screen, baseY, baseX);
+				break;
+			default:
+				npc.drawOnScreen(screen, baseY, baseX);
 				break;
 			}
 		}

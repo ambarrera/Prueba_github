@@ -7,20 +7,20 @@ BattleEnemy::BattleEnemy(int typeOfObject, int battleX, int battleY, int hp, int
 }
 
 void BattleEnemy::setUpChars() {
+	char newChars2[13] = { 200, 233, 188, '/', '|', ' ', '|', '\\', '|', '_', '|', 217, 192 };
+
+	int newCoordY2[13] = { -3, -3, -3, -2, -2, -2, -2, -2, -1, -1, -1, 0, 0 };
+	int newCoordX2[13] = { -1, 0, 1, -2, -1, 0, 1, 2, -1, 0, 1, -1, 1 };
+
 	switch (typeOfObject)
 	{
 	case 2:
 		numChars = 13;
 
-		char newChars[13] = { 200, 233, 188, '/', '|', ' ', '|', '\\', '|', '_', '|', 217, 192 };
-		
-		int newCoordY[13] = {-3, -3, -3, -2, -2, -2, -2, -2, -1, -1, -1, 0, 0};
-		int newCoordX[13] = {-1, 0, 1, -2, -1, 0, 1, 2, -1, 0, 1, -1, 1};
-
 		for (int i = 0; i < numChars; i++) {
-			chars[i] = newChars[i];
-			charPos[i][0] = newCoordY[i];
-			charPos[i][1] = newCoordX[i];
+			chars[i] = newChars2[i];
+			charPos[i][0] = newCoordY2[i];
+			charPos[i][1] = newCoordX2[i];
 		}
 		break;
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include "BattlePlayer.h"
 #include "BattleEnemy.h"
+#include "BattleNpc.h"
 
 class BattleBoard
 {
@@ -17,4 +18,5 @@ private:
 	int** board;
 	BattleEnemy enemy;
 	BattlePlayer player;
+	BattleNpc npc;
 };
