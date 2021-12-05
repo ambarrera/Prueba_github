@@ -61,7 +61,9 @@ void MainUI::draw(char** screen) {
 
     char* inventoryNames[4] = { "Health Potion", "Apple", "Candy", "Acorn"};
 
+    drawOnScreen(screen, 90, 10, "Sword");
+
     for (int i = 0; i < inventory.numObjects; i++) {
-        drawOnScreen(screen, 90, 10 + i, inventoryNames[inventory.objects[i]]);
+        drawOnScreen(screen, 90, 11 + i, inventoryNames[inventory.objects[i]]);
     }
 }
