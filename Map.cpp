@@ -76,7 +76,7 @@ int Map::setUpMap(int numMap) {
 			for (int i = 0; i < num; i++) {
 				mapFile >> chestX;
 				mapFile >> chestY;
-				chest[i] = new Chest(chestX, chestY, 'C');
+				chest[i] = new Chest(chestX, chestY, 'C', 0);
 			}
 		}
 		else {
@@ -195,17 +195,19 @@ void Map::checkInteractions(int* typeOfObject, int* numObject) {
 	//Check chests
 	int chestX, chestY;
 	for (int i = 0; i < numChests; i++) {
-		chest[i]->getCoordinates(&chestX, &chestY);
-		if (playerX == chestX) {
-			if (playerY == chestY - 1 || playerY == chestY + 1) {
-				*(typeOfObject) = 2;
-				*(numObject) = i;
+		if (!chest[i]->isOpen) {
+			chest[i]->getCoordinates(&chestX, &chestY);
+			if (playerX == chestX) {
+				if (playerY == chestY - 1 || playerY == chestY + 1) {
+					*(typeOfObject) = 2;
+					*(numObject) = i;
+				}
 			}
-		}
-		else if (playerY == chestY) {
-			if (playerX == chestX - 1 || playerX == chestX + 1) {
-				*(typeOfObject) = 2;
-				*(numObject) = i;
+			else if (playerY == chestY) {
+				if (playerX == chestX - 1 || playerX == chestX + 1) {
+					*(typeOfObject) = 2;
+					*(numObject) = i;
+				}
 			}
 		}
 	}

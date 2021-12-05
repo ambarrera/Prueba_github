@@ -84,19 +84,40 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         if (newMapNum != -1) {
             changeMap(newMapNum, newPlayerX, newPlayerY);
         }
-        for (int i = 0; i < 3; i++) {
-            cleanScreen(24 + i);
-        }
         if (map[numMap]->player.isInteracting) {
             switch (typeOfObject)
             {
             case 1:
+                for (int i = 0; i < 3; i++) {
+                    cleanScreen(24 + i);
+                }
                 mainUI.displayDialogue(screen, map[numMap]->npc[numObject]->getLineDialogue(map[numMap]->npc[numObject]->numLines - (map[numMap]->player.isInteracting)));
                 break;
             case 2:
-                mainUI.displayDialogue(screen, "You found a chest, it contains... a potion!_One potion has been added to your inventory");
+                if (mainUI.inventory.addObject(map[numMap]->chest[numObject]->Open())) {
+                    switch (map[numMap]->chest[numObject]->Open()) {
+                    case 0:
+                        mainUI.displayDialogue(screen, "You found a chest, it contains... a potion!_One potion has been added to your inventory");
+                        break;
+                    case 1:
+                        mainUI.displayDialogue(screen, "You didn't found a potion :(");
+                        break;
+                    default:
+                        break;
+                    }
+                    break;
+                }
+                else {
+                    map[numMap]->chest[numObject]->Close();
+                    mainUI.displayDialogue(screen, "There is not enough space in your inventory!_Try getting using some of the stuff you already have.");
+                }
             default:
                 break;
+            }
+        }
+        else {
+            for (int i = 0; i < 3; i++) {
+                cleanScreen(24 + i);
             }
         }
         //Prueba
