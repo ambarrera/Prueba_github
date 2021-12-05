@@ -17,7 +17,7 @@ Map::Map(int numMap, int cornerX, int cornerY, int playerX, int playerY):
 	case 1:
 		filename += ".txt";
 		npc = new Npc * [numNPCs];
-		npc[0] = new Npc(filename);
+		npc[0] = new Npc(filename, numMap);
 		break;
 	default:
 		filename += "-";
@@ -26,7 +26,7 @@ Map::Map(int numMap, int cornerX, int cornerY, int playerX, int playerY):
 		for (int i = 0; i < numNPCs; i++) {
 			fileNameNpc = filename + std::to_string(i);
 			fileNameNpc += ".txt";
-			npc[i] = new Npc(fileNameNpc);
+			npc[i] = new Npc(fileNameNpc, numMap);
 		}
 		break;
 	}

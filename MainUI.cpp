@@ -59,7 +59,7 @@ void MainUI::draw(char** screen) {
     }
     drawOnScreen(screen, 88, 21, "|___________________________|");
 
-    char* inventoryNames[2] = { "Potion", "Not a potion"};
+    char* inventoryNames[4] = { "Health Potion", "Apple", "Candy", "Acorn"};
 
     for (int i = 0; i < inventory.numObjects; i++) {
         drawOnScreen(screen, 90, 10 + i, inventoryNames[inventory.objects[i]]);

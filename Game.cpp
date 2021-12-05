@@ -105,7 +105,7 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
             {
             case 1:
                 if (talkNpc == nullptr) {
-                    talkNpc = new BattleBoard(3, 6, 8);
+                    talkNpc = new BattleBoard(3, 6, 8 + map[numMap]->npc[numObject]->numNpc);
                     for (int i = 0; i < 20; i++) {
                         cleanScreen(i + 2);
                     }
@@ -149,7 +149,7 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         int playerX;
         int playerY;
         map[numMap]->player.getCoordinates(&playerX, &playerY);
-        if (playerX > 20) {
+        if (playerX > 50) {
             for (int i = 0; i < 20; i++) {
                 cleanScreen(i + 2);
             }

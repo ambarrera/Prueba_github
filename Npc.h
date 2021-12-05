@@ -6,11 +6,12 @@ class Npc :
     public Creature
 {
 public:
-	Npc(std::string fileName);
+	Npc(std::string fileName, int numNpc);
 	~Npc();
 	std::string getLineDialogue(int x);
 
 	int numLines;
+	int numNpc;
 
 private:
 	//Variables

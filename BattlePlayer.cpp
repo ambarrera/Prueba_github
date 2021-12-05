@@ -81,7 +81,7 @@ void BattlePlayer::drawOnBoard(int** battleBoard, int boardRows, int boardColumn
 		battleX = lastBattleX;
 		battleY = lastBattleY;
 	}
-	if (battleBoard[battleY][battleX] == 2) {
+	if (battleBoard[battleY][battleX] >= 2) {
 		battleX = lastBattleX;
 		battleY = lastBattleY;
 	}

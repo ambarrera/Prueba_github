@@ -1,9 +1,10 @@
 #include "Npc.h"
 #include <fstream>
 
-Npc::Npc(std::string fileName):
+Npc::Npc(std::string fileName, int numNpc):
 	Creature(0, 0, 'N')
 {
+	this->numNpc = numNpc;
 	std::fstream npcFile;
 	npcFile.open(fileName, std::ios::in);
 	if (npcFile.is_open()) {
