@@ -7,6 +7,6 @@ public:
 	bool addObject(int typeOfObject);
 	void removeObject(int numObject);
 
-	int objects[5];
+	int objects[10];
 	int numObjects;
 };
