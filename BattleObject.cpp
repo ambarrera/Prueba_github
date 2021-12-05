@@ -50,7 +50,7 @@ void BattleObject::move(Direction direction) {
 void BattleObject::update() {
 	lastBattleX = battleX;
 	lastBattleY = battleY;
-	move(Direction::DOWN);
+	//move(Direction::DOWN);
 }
 
 void BattleObject::drawOnBoard(int** battleBoard, int boardRows, int boardColumns) {

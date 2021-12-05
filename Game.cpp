@@ -2,21 +2,33 @@
 
 #include "Game.h"
 #include <iostream>
+#include <stdio.h>   // NULL
+#include <stdlib.h>  // srand and rand
+#include <time.h>    // time
 
 Game::Game(int screenWidth, int screenHeight, int numMaps):
-    mainUI(6, 24), mainMenu(), battleBoard(3, 6)
+    mainUI(6, 24), mainMenu()
 {
+    srand(time(NULL));
     //Variables
     running = true;
     height = screenHeight;
     width = screenWidth;
     numMap = 0;
     maxMaps = numMaps;
+    numBattle = 0;
+    maxBattles = 6;
     game_state = GameState::MAIN_MENU;
+    talkNpc = nullptr;
     //Maps
     map = new Map * [numMaps];
     for (int i = 0; i < numMaps; i++) {
         map[i] = new Map(i, 5, 2, 3, 10);
+    }
+    //Battles
+    battle = new BattleBoard * [maxBattles];
+    for (int i = 0; i < maxBattles; i++) {
+        battle[i] = new BattleBoard(3, 6, 2 + i);
     }
 
     //Configuración de pantalla
@@ -28,6 +40,10 @@ Game::~Game() {
         delete map[i];
     }
     delete[] map;
+    for (int i = 0; i < maxBattles; i++) {
+        delete battle[i];
+    }
+    delete[] battle;
     for (int i = 0; i < height; i++) {
         delete[] screen[i];
     }
@@ -88,6 +104,13 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
             switch (typeOfObject)
             {
             case 1:
+                if (talkNpc == nullptr) {
+                    talkNpc = new BattleBoard(3, 6, 8);
+                    for (int i = 0; i < 20; i++) {
+                        cleanScreen(i + 2);
+                    }
+                    talkNpc->update();
+                }
                 for (int i = 0; i < 3; i++) {
                     cleanScreen(24 + i);
                 }
@@ -116,6 +139,8 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
             }
         }
         else {
+            delete talkNpc;
+            talkNpc = nullptr;
             for (int i = 0; i < 3; i++) {
                 cleanScreen(24 + i);
             }
@@ -128,11 +153,12 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
             for (int i = 0; i < 20; i++) {
                 cleanScreen(i + 2);
             }
+            numBattle = rand() % maxBattles;
             game_state = GameState::COMBAT;
         }
         break;
     case GameState::COMBAT:
-        battleBoard.update();
+        battle[numBattle]->update();
         break;
     case GameState::GAME_OVER:
         //nose aún
@@ -153,11 +179,16 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         break;
     case GameState::EXPLORATION:
         mainUI.draw(screen);
-        map[numMap]->draw(screen);
+        if (talkNpc == nullptr) {
+            map[numMap]->draw(screen);
+        }
+        else {
+            talkNpc->draw(screen);
+        }
         break;
     case GameState::COMBAT:
         mainUI.draw(screen);
-        battleBoard.draw(screen);
+        battle[numBattle]->draw(screen);
         break;
     case GameState::GAME_OVER:
         //nose aún

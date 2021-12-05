@@ -27,6 +27,8 @@ private:
     int height;
     int numMap;
     int maxMaps;
+    int numBattle;
+    int maxBattles;
 
     //Variables privadas y funcion para configurar la pantalla
     char** screen;
@@ -47,7 +49,8 @@ private:
     Map** map;
     MainUI mainUI;
     MainMenu mainMenu;
-    BattleBoard battleBoard;
+    BattleBoard** battle;
+    BattleBoard* talkNpc;
 
     void cleanScreen(int a);
     void changeGameState(GameState newState);

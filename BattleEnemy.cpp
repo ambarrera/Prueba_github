@@ -23,5 +23,60 @@ void BattleEnemy::setUpChars() {
 			charPos[i][1] = newCoordX2[i];
 		}
 		break;
+
+	case 3:
+		numChars = 13;
+
+		for (int i = 0; i < numChars; i++) {
+			chars[i] = newChars2[i];
+			charPos[i][0] = newCoordY2[i];
+			charPos[i][1] = newCoordX2[i];
+		}
+		break;
+
+	case 4:
+		numChars = 13;
+
+		for (int i = 0; i < numChars; i++) {
+			chars[i] = newChars2[i];
+			charPos[i][0] = newCoordY2[i];
+			charPos[i][1] = newCoordX2[i];
+		}
+		break;
+
+	case 5:
+		numChars = 13;
+
+		for (int i = 0; i < numChars; i++) {
+			chars[i] = newChars2[i];
+			charPos[i][0] = newCoordY2[i];
+			charPos[i][1] = newCoordX2[i];
+		}
+		break;
+
+	case 6:
+		numChars = 13;
+
+		for (int i = 0; i < numChars; i++) {
+			chars[i] = newChars2[i];
+			charPos[i][0] = newCoordY2[i];
+			charPos[i][1] = newCoordX2[i];
+		}
+		break;
+
+	case 7:
+		numChars = 13;
+
+		for (int i = 0; i < numChars; i++) {
+			chars[i] = newChars2[i];
+			charPos[i][0] = newCoordY2[i];
+			charPos[i][1] = newCoordX2[i];
+		}
+		break;
+
+	default:
+		typeOfObject = 0;
+		numChars = 0;
+		break;
 	}
 }

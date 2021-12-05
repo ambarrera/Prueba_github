@@ -72,11 +72,13 @@ int Map::setUpMap(int numMap) {
 		if (num) {
 			int chestX;
 			int chestY;
+			int objectType;
 			chest = new Chest * [num];
 			for (int i = 0; i < num; i++) {
 				mapFile >> chestX;
 				mapFile >> chestY;
-				chest[i] = new Chest(chestX, chestY, 'C', 0);
+				mapFile >> objectType;
+				chest[i] = new Chest(chestX, chestY, objectType);
 			}
 		}
 		else {

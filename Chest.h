@@ -5,7 +5,7 @@ class Chest:
 	public Object
 {
 public:
-	Chest(int x, int y, int symbol, int typeOfObject);
+	Chest(int x, int y, int typeOfObject);
 	int Open();
 	void Close();
 

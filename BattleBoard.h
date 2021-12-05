@@ -6,7 +6,7 @@
 class BattleBoard
 {
 public:
-	BattleBoard(int boardRows, int BoardColumns);
+	BattleBoard(int boardRows, int BoardColumns, int objectType);
 	~BattleBoard();
 	void update();
 	void draw(char** screen);

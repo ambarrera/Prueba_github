@@ -1,7 +1,7 @@
 #include "BattleBoard.h"
 
-BattleBoard::BattleBoard(int boardRows, int boardColumns) :
-	enemy(2, 2, 0, 50, 15, 10), player(0, 0), npc(3, 4, 1, 50, 20, 10)
+BattleBoard::BattleBoard(int boardRows, int boardColumns, int objectType) :
+	enemy(objectType, 5, 1, 50, 15, 10), player(2, 1), npc(objectType, 3, 1, 50, 20, 10)
 {
 	frames = 0;
 	rows = boardRows;
@@ -29,9 +29,9 @@ void BattleBoard::update() {
 	enemy.update();
 	player.update();
 	npc.update();
+	npc.drawOnBoard(board, rows, columns);
 	enemy.drawOnBoard(board, rows, columns);
 	player.drawOnBoard(board, rows, columns);
-	npc.drawOnBoard(board, rows, columns);
 }
 
 void BattleBoard::draw(char** screen) {
@@ -52,8 +52,7 @@ void BattleBoard::draw(char** screen) {
 		for (int x = 0; x < columns; x++) {
 			baseY = offY + 3 * y + 2;
 			baseX = offX + 10 * x + 5;
-			switch (board[y][x]) {
-			case 0:
+			if (board[y][x] == 0) {
 				if (y == 0) {
 					screen[baseY - 3][baseX - 1] = ' ';
 					screen[baseY - 3][baseX] = ' ';
@@ -68,17 +67,16 @@ void BattleBoard::draw(char** screen) {
 				screen[baseY][baseX - 1] = ' ';
 				screen[baseY][baseX] = ' ';
 				screen[baseY][baseX + 1] = ' ';
-				break;
-			case 1:
-				player.drawOnScreen(screen, baseY, baseX);
-				break;
-			case 2:
-				enemy.drawOnScreen(screen, baseY, baseX);
-				break;
-			default:
-				npc.drawOnScreen(screen, baseY, baseX);
-				break;
 			}
+			else if (board[y][x] == 1) {
+				player.drawOnScreen(screen, baseY, baseX);
+			}
+			else if (board[y][x] <= 7) {
+				enemy.drawOnScreen(screen, baseY, baseX);
+			}
+			else {
+				npc.drawOnScreen(screen, baseY, baseX);
+			}		
 		}
 	}
 }
