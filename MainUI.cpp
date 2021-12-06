@@ -20,6 +20,12 @@ void MainUI::displayDialogue(char**screen, std::string line) {
     }
 }
 
+void MainUI::displayStats(char** screen, int hp, int atk, int def) {
+    drawOnScreen(screen, 95, 3, hp);
+    drawOnScreen(screen, 95, 4, atk);
+    drawOnScreen(screen, 95, 5, def);
+}
+
 void MainUI::draw(char** screen) {
     //Cuadrante del mapa
     drawOnScreen(screen, 5, 1, "_______________________________> MYRKVI R WOODS <_______________________________");
@@ -48,9 +54,6 @@ void MainUI::draw(char** screen) {
     drawOnScreen(screen, 90, 3, "HP:");
     drawOnScreen(screen, 90, 4, "ATK:");
     drawOnScreen(screen, 90, 5, "DEF:");
-    drawOnScreen(screen, 95, 3, 12);
-    drawOnScreen(screen, 95, 4, 12);
-    drawOnScreen(screen, 95, 5, 12);
     //Cuadrante del "inventory"
     drawOnScreen(screen, 89, 8, "_INVENTORY_________________");
     for (int i = 0; i < 12; i++) {

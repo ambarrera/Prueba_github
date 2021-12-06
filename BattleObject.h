@@ -9,6 +9,9 @@ public:
 	void drawOnScreen(char** screen, int baseY, int baseX);
 	void update();
 
+	//Stats
+	int hp, atk, def;
+
 protected:
 	enum class Direction {
 		LEFT,
@@ -30,6 +33,4 @@ protected:
 	int** charPos;
 	char* chars;
 
-	//Stats
-	int hp, atk, def;
 };

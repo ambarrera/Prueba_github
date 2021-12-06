@@ -165,6 +165,15 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         break;
     case GameState::COMBAT:
         battle[numBattle]->update();
+        if (battle[numBattle]->player.hp <= 0) {
+            game_state = GameState::GAME_OVER;
+        }
+        else if (battle[numBattle]->enemy.hp <= 0) {
+            for (int i = 0; i < maxBattles; i++) {
+                battle[i]->player.hp = battle[numBattle]->player.hp;
+            }
+            game_state = GameState::EXPLORATION;
+        }
         break;
     case GameState::GAME_OVER:
         //nose aún
@@ -185,6 +194,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         break;
     case GameState::EXPLORATION:
         mainUI.draw(screen);
+        mainUI.displayStats(screen, battle[numBattle]->player.hp, battle[numBattle]->player.atk, battle[numBattle]->player.def);
         if (talkNpc == nullptr) {
             map[numMap]->draw(screen);
         }
@@ -194,6 +204,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         break;
     case GameState::COMBAT:
         mainUI.draw(screen);
+        mainUI.displayStats(screen, battle[numBattle]->player.hp, battle[numBattle]->player.atk, battle[numBattle]->player.def);
         battle[numBattle]->draw(screen);
         break;
     case GameState::GAME_OVER:

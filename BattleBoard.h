@@ -11,12 +11,13 @@ public:
 	void update();
 	void draw(char** screen);
 
+	BattlePlayer player;
+	BattleEnemy enemy;
+
 private:
 	int frames;
 	int rows;
 	int columns;
 	int** board;
-	BattleEnemy enemy;
-	BattlePlayer player;
 	BattleNpc npc;
 };
