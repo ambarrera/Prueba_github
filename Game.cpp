@@ -123,7 +123,13 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
                         mainUI.displayDialogue(screen, "You found a chest, it contains... a potion!_One potion has been added to your inventory");
                         break;
                     case 1:
-                        mainUI.displayDialogue(screen, "You didn't found a potion :(");
+                        mainUI.displayDialogue(screen, "You found a chest, it contains... an apple!_One apple has been added to your inventory");
+                        break;
+                    case 2:
+                        mainUI.displayDialogue(screen, "You found a chest, it contains... a candy!_One candy has been added to your inventory");
+                        break;
+                    case 3:
+                        mainUI.displayDialogue(screen, "You found a chest, it contains... an acorn!_One acorn has been added to your inventory");
                         break;
                     default:
                         break;
@@ -149,7 +155,7 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         int playerX;
         int playerY;
         map[numMap]->player.getCoordinates(&playerX, &playerY);
-        if (playerX > 50) {
+        if (playerX > 90) {
             for (int i = 0; i < 20; i++) {
                 cleanScreen(i + 2);
             }
