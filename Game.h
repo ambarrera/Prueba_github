@@ -1,4 +1,5 @@
 #pragma once
+#include "UI.h"
 #include "Map.h"
 #include "MainUI.h"
 #include "MainMenu.h"
@@ -30,6 +31,8 @@ private:
     int maxMaps;
     int numBattle;
     int maxBattles;
+    int numFrame;
+    int lastbattle;
 
     //Variables privadas y funcion para configurar la pantalla
     char** screen;
@@ -53,6 +56,7 @@ private:
     BattleBoard** battle;
     BattleBoard* talkNpc;
     GameOverMenu gomenu;
+    UI credits;
 
     void cleanScreen(int a);
     void changeGameState(GameState newState);

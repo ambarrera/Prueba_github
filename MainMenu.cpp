@@ -1,7 +1,7 @@
 #include "MainMenu.h"
 
 MainMenu::MainMenu() :
-    Menu(0, 4) {}
+    Menu(0, 3) {}
 
 void MainMenu::draw(char** screen) {
     //LETRA M        
@@ -95,9 +95,8 @@ void MainMenu::draw(char** screen) {
 
     //Comandos(?)
     drawOnScreen(screen, 45, 15, "New Game");
-    drawOnScreen(screen, 45, 16, "Continue");
-    drawOnScreen(screen, 45, 17, "Credits");
-    drawOnScreen(screen, 45, 18, "Exit");
+    drawOnScreen(screen, 45, 16, "Credits");
+    drawOnScreen(screen, 45, 17, "Exit");
 
     //Cursor
     drawOnScreen(screen, 43, 15 + lastCursorPos, ' ');

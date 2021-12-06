@@ -7,7 +7,7 @@
 #include <time.h>    // time
 
 Game::Game(int screenWidth, int screenHeight, int numMaps):
-    mainUI(6, 24), mainMenu()
+    mainUI(6, 24), mainMenu(), credits()
 {
     srand(time(NULL));
     //Variables
@@ -20,6 +20,8 @@ Game::Game(int screenWidth, int screenHeight, int numMaps):
     maxBattles = 6;
     game_state = GameState::MAIN_MENU;
     talkNpc = nullptr;
+    numFrame = 0;
+    lastbattle = 0;
     //Maps
     map = new Map * [numMaps];
     for (int i = 0; i < numMaps; i++) {
@@ -80,12 +82,12 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
             changeGameState(GameState::EXPLORATION);
             break;
         case 1:
-            changeGameState(GameState::EXPLORATION);
-            break;
-        case 2:
+            for (int i = 0; i < height; i++) {
+                cleanScreen(i);
+            }
             changeGameState(GameState::CREDITS);
             break;
-        case 3:
+        case 2:
             running = false;
             break;
         }
@@ -151,19 +153,18 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
                 cleanScreen(24 + i);
             }
         }
-        //Prueba
-        int playerX;
-        int playerY;
-        map[numMap]->player.getCoordinates(&playerX, &playerY);
-        if (playerX == 18 && playerY == 10) {
-            for (int i = 0; i < 20; i++) {
-                cleanScreen(i + 2);
+        //Activar Combate
+        if (!map[numMap]->player.isInteracting) {
+            if ((numFrame - lastbattle) % 70 == 0) {
+                for (int i = 0; i < 20; i++) {
+                    cleanScreen(i + 2);
+                }
+                numBattle = rand() % maxBattles;
+                for (int i = 0; i < maxBattles; i++) {
+                    battle[i]->player.hp = battle[numBattle]->player.hp;
+                }
+                game_state = GameState::COMBAT;
             }
-            numBattle = rand() % maxBattles;
-            for (int i = 0; i < maxBattles; i++) {
-                battle[i]->player.hp = battle[numBattle]->player.hp;
-            }
-            game_state = GameState::COMBAT;
         }
         break;
     case GameState::COMBAT:
@@ -178,6 +179,7 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
             for (int i = 0; i < maxBattles; i++) {
                 battle[i]->player.hp = battle[numBattle]->player.hp;
             }
+            lastbattle = numFrame;
             game_state = GameState::EXPLORATION;
             battle[numBattle]->enemy.hp = 50;
         }
@@ -195,11 +197,17 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         }
         break;
     case GameState::CREDITS:
-        //nose aún
+        if (GetAsyncKeyState('J') & 0x8000) {
+            for (int i = 0; i < height; i++) {
+                cleanScreen(i);
+            }
+            game_state = GameState::MAIN_MENU;
+        }
         break;
     default:
         break;
     }
+    numFrame += 1;
 }
 
 void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
@@ -233,7 +241,7 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         gomenu.draw(screen);
         break;
     case GameState::CREDITS:
-        //nose aún
+        credits.draw(screen);
         break;
     default:
         break;

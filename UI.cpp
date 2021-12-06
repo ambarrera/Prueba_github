@@ -13,7 +13,15 @@ void UI::drawOnScreen(char** screen, int x, int y, char* line) {
 }
 
 void UI::draw(char** screen) {
-    //do nothing
+    drawOnScreen(screen, 45, 10, "CREDITS");
+
+    //Nombres
+    drawOnScreen(screen, 45, 13, "Mariana Caceres");
+    drawOnScreen(screen, 45, 14, "Diego Zeballos");
+    drawOnScreen(screen, 45, 15, "Amara Barrera");
+    drawOnScreen(screen, 45, 16, "Gabriel Nuñez");
+
+    drawOnScreen(screen, 45, 18, "Press 'J' to go back.");
 }
 
 void UI::drawOnScreen(char** screen, int x, int y, int num) {
