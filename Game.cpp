@@ -155,7 +155,7 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         int playerX;
         int playerY;
         map[numMap]->player.getCoordinates(&playerX, &playerY);
-        if (playerX > 90) {
+        if (playerX == 18 && playerY == 10) {
             for (int i = 0; i < 20; i++) {
                 cleanScreen(i + 2);
             }
