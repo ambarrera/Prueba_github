@@ -61,4 +61,9 @@ private:
     void cleanScreen(int a);
     void changeGameState(GameState newState);
     void changeMap(int newMapNum, int newPlayerX, int newPlayerY);
+
+    //Set Up Screen
+    char* newScreen;
+    HANDLE console;
+    DWORD dwBytes;
 };

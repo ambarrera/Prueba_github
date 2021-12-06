@@ -62,6 +62,11 @@ void Game::setUpScreen() {
             screen[y][x] = ' ';
         }
     }
+    //HANDLE
+    newScreen = new char[width * height];
+    console = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+    dwBytes = 0;
+    SetConsoleActiveScreenBuffer(console);
 }
 
 void Game::run() {
@@ -69,7 +74,7 @@ void Game::run() {
         updateAllObjects();
         updateScreen();
         renderScreen(); //Esto ya está definido en Game.cpp
-        //Sleep(32);
+        Sleep(64);
     }
 }
 
@@ -188,7 +193,9 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
         switch (gomenu.update()) {
         case 0:
             changeGameState(GameState::EXPLORATION);
-            battle[numBattle]->player.hp = 100;
+            for (int i = 0; i < maxBattles; i++) {
+                battle[i]->player.hp = 100;
+            }
             changeMap(0, 3, 10);
             break;
         case 1:
@@ -269,15 +276,11 @@ void Game::cleanScreen(int a) {
 }
 
 void Game::renderScreen() {
-    //screen[width * height - 1] = '\0';
-    system("CLS");
-    for (int y = 0; y < height - 1; y++) {
+    for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            std::cout << screen[y][x];
+            newScreen[width * y + x] = screen[y][x];
         }
-        std::cout << std::endl;
     }
-    for (int x = 0; x < width; x++) {
-        std::cout << screen[height - 1][x];
-    }
+    newScreen[width * height - 1] = '\0';
+    WriteConsoleOutputCharacter(console, newScreen, width * height, { 0, 0 }, &dwBytes);
 }
