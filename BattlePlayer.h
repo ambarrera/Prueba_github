@@ -7,7 +7,7 @@ class BattlePlayer :
 public:
     BattlePlayer(int x, int y);
 	void drawOnBoard(int** battleBoard, int boardRows, int boardColumns);
-	void update();
+	void update(int currentFrame);
 
 private:
 	enum class Action {
@@ -22,6 +22,5 @@ private:
 
 	Action lastAction;
     void handleInput();
-	void attack();
 
 };

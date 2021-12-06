@@ -105,3 +105,89 @@ void BattleEnemy::setUpChars() {
 		break;
 	}
 }
+
+void BattleEnemy::update(int currentFrame) {
+	lastBattleX = battleX;
+	lastBattleY = battleY;
+	switch (typeOfObject)
+	{
+	case 2:
+		//nada
+		break;
+	case 3:
+		if (currentFrame % 10 == 0) {
+			move(Direction::LEFT);
+		}
+		else if (currentFrame % 5 == 0) {
+			move(Direction::RIGHT);
+		}
+		break;
+	case 4:
+		if (currentFrame % 40 == 0) {
+			move(Direction::LEFT);
+		}
+		else if (currentFrame % 20 == 0) {
+			move(Direction::DOWN);
+		}
+		else if (currentFrame % 10 == 0) {
+			move(Direction::UP);
+		}
+		else if (currentFrame % 15 == 0) {
+			move(Direction::UP);
+		}
+		else if (currentFrame % 5 == 0) {
+			move(Direction::DOWN);
+		}
+		break;
+	case 5:
+		if (currentFrame % 40 == 0) {
+			move(Direction::DOWN);
+		}
+		else if (currentFrame % 20 == 0) {
+			move(Direction::UP);
+		}
+		else if (currentFrame % 10 == 0) {
+			move(Direction::UP);
+		}
+		else if (currentFrame % 5 == 0) {
+			move(Direction::DOWN);
+		}
+		else if (currentFrame % 9) {
+			attack();
+		}
+		break;
+	case 6:
+		if (currentFrame % 40 == 0) {
+			move(Direction::LEFT);
+		}
+		break;
+	case 7:
+		if (currentFrame % 80 == 0) {
+			move(Direction::DOWN);
+		}
+		else if (currentFrame % 40 == 0) {
+			move(Direction::UP);
+		}
+		else if (currentFrame % 10 == 0) {
+			move(Direction::UP);
+		}
+		else if (currentFrame % 10 == 0) {
+			move(Direction::DOWN);
+		}
+		else if (currentFrame % 5) {
+			attack();
+		}
+		if (isAttacking) {
+			chars[5] = 196;
+			charPos[6][0] = -2;
+			lastFrame = currentFrame;
+		}
+		if (currentFrame == lastFrame + 5); {
+			chars[5] = '\\';
+			charPos[6][0] = -3;
+		}
+		break;
+	default:
+		break;
+	}
+}

@@ -3,7 +3,7 @@
 MainMenu::MainMenu() :
     Menu(0, 4) {}
 
-void Menu::draw(char** screen) {
+void MainMenu::draw(char** screen) {
     //LETRA M        
     drawOnScreen(screen, 10, 5, char(219)); drawOnScreen(screen, 11, 4, char(219)); drawOnScreen(screen, 12, 3, char(219)); drawOnScreen(screen, 13, 3, char(219)); drawOnScreen(screen, 14, 3, char(219)); drawOnScreen(screen, 15, 3, char(219)); drawOnScreen(screen, 16, 2, char(219)); drawOnScreen(screen, 17, 2, char(219)); drawOnScreen(screen, 18, 2, char(219));
     drawOnScreen(screen, 10, 6, char(219)); drawOnScreen(screen, 11, 5, char(219)); drawOnScreen(screen, 12, 4, char(219)); drawOnScreen(screen, 16, 3, char(219)); drawOnScreen(screen, 17, 3, char(219)); drawOnScreen(screen, 18, 3, char(219)); drawOnScreen(screen, 19, 3, char(219)); drawOnScreen(screen, 20, 3, char(219)); drawOnScreen(screen, 21, 3, char(219)); drawOnScreen(screen, 22, 3, char(219)); drawOnScreen(screen, 23, 3, char(219));

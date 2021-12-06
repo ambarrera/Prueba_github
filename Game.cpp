@@ -160,12 +160,18 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
                 cleanScreen(i + 2);
             }
             numBattle = rand() % maxBattles;
+            for (int i = 0; i < maxBattles; i++) {
+                battle[i]->player.hp = battle[numBattle]->player.hp;
+            }
             game_state = GameState::COMBAT;
         }
         break;
     case GameState::COMBAT:
         battle[numBattle]->update();
         if (battle[numBattle]->player.hp <= 0) {
+            for (int i = 0; i < height; i++) {
+                cleanScreen(i);
+            }
             game_state = GameState::GAME_OVER;
         }
         else if (battle[numBattle]->enemy.hp <= 0) {
@@ -173,10 +179,20 @@ void Game::updateAllObjects() {//Aquí se maneja la lógica del juego
                 battle[i]->player.hp = battle[numBattle]->player.hp;
             }
             game_state = GameState::EXPLORATION;
+            battle[numBattle]->enemy.hp = 50;
         }
         break;
     case GameState::GAME_OVER:
-        //nose aún
+        switch (gomenu.update()) {
+        case 0:
+            changeGameState(GameState::EXPLORATION);
+            battle[numBattle]->player.hp = 100;
+            changeMap(0, 3, 10);
+            break;
+        case 1:
+            running = false;
+            break;
+        }
         break;
     case GameState::CREDITS:
         //nose aún
@@ -193,6 +209,9 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         mainMenu.draw(screen);
         break;
     case GameState::EXPLORATION:
+        for (int i = 0; i < 3; i++) {
+            cleanScreen(3 + i);
+        }
         mainUI.draw(screen);
         mainUI.displayStats(screen, battle[numBattle]->player.hp, battle[numBattle]->player.atk, battle[numBattle]->player.def);
         if (talkNpc == nullptr) {
@@ -203,12 +222,15 @@ void Game::updateScreen() { //Aquí se modifica el array que se imprimirá
         }
         break;
     case GameState::COMBAT:
+        for (int i = 0; i < 3; i++) {
+            cleanScreen(3 + i);
+        }
         mainUI.draw(screen);
         mainUI.displayStats(screen, battle[numBattle]->player.hp, battle[numBattle]->player.atk, battle[numBattle]->player.def);
         battle[numBattle]->draw(screen);
         break;
     case GameState::GAME_OVER:
-        //nose aún
+        gomenu.draw(screen);
         break;
     case GameState::CREDITS:
         //nose aún

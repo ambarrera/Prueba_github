@@ -6,11 +6,10 @@ class Menu :
 {
 public:
     Menu(int cursor, int numOptions);
-    void draw(char** screen);
     int update();
     void changeCursorPos(int y);
 
-private:
+protected:
     int lastCursorPos;
     int cursorPos;
     int numOptions;

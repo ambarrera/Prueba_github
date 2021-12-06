@@ -1,6 +1,7 @@
 #include "BattleObject.h"
 
 BattleObject::BattleObject(int typeOfObject, int battleX, int battleY, int hp, int atk, int def, int numChars) {
+	lastFrame = 0;
 	this->typeOfObject = typeOfObject;
 	this->battleX = battleX;
 	this->battleY = battleY;
@@ -9,6 +10,7 @@ BattleObject::BattleObject(int typeOfObject, int battleX, int battleY, int hp, i
 	this->hp = hp;
 	this->atk = atk;
 	this->def = def;
+	isAttacking = false;
 
 	this->numChars = numChars;
 	charPos = new int* [numChars];
@@ -53,17 +55,28 @@ void BattleObject::update() {
 	//move(Direction::DOWN);
 }
 
-void BattleObject::drawOnBoard(int** battleBoard, int boardRows, int boardColumns) {
+bool BattleObject::drawOnBoard(int** battleBoard, int boardRows, int boardColumns) {
+	bool returnValue = false;
 	battleBoard[lastBattleY][lastBattleX] = 0;
 	if (battleY >= boardRows || battleX >= boardColumns || battleY < 0 || battleX < 0) {
 		battleX = lastBattleX;
 		battleY = lastBattleY;
 	}
+	if (battleBoard[battleY][battleX] == 1) {
+		battleX = lastBattleX;
+		battleY = lastBattleY;
+		returnValue = true;
+	}
 	battleBoard[battleY][battleX] = typeOfObject;
+	return returnValue;
 }
 
 void BattleObject::drawOnScreen(char** screen, int baseY, int baseX) {
 	for (int i = 0; i < numChars; i++) {
 		screen[baseY + charPos[i][0]][baseX + charPos[i][1]] = chars[i];
 	}
+}
+
+void BattleObject::attack() {
+	isAttacking = true;
 }

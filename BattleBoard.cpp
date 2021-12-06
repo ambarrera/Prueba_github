@@ -1,7 +1,7 @@
 #include "BattleBoard.h"
 
 BattleBoard::BattleBoard(int boardRows, int boardColumns, int objectType) :
-	enemy(objectType, 5, 1, 50, 15, 10), player(2, 1), npc(objectType, 3, 1, 50, 20, 10)
+	enemy(objectType, 5, 1, 50, 25, 10), player(2, 1), npc(objectType, 3, 1, 50, 20, 10)
 {
 	frames = 0;
 	rows = boardRows;
@@ -26,12 +26,31 @@ BattleBoard::~BattleBoard() {
 }
 
 void BattleBoard::update() {
-	enemy.update();
-	player.update();
+	enemy.update(frames);
+	player.update(frames);
 	npc.update();
 	npc.drawOnBoard(board, rows, columns);
-	enemy.drawOnBoard(board, rows, columns);
+	bool playerDamaged = enemy.drawOnBoard(board, rows, columns);
 	player.drawOnBoard(board, rows, columns);
+	if (player.isAttacking) {
+		if (player.battleX + 1 == enemy.battleX && player.battleY == enemy.battleY) {
+			enemy.hp -= player.atk - enemy.def;
+		}
+	}
+	if (playerDamaged) {
+		player.hp -= enemy.atk - player.def;
+	}
+	if (enemy.isAttacking) {
+		if (enemy.typeOfObject == 7) {
+			if (enemy.battleX - 1 == player.battleX && enemy.battleY == player.battleY) {
+				player.hp -= enemy.atk - player.def;
+			}
+		}
+		else {
+			//Centauro
+		}
+	}
+	frames += 1;
 }
 
 void BattleBoard::draw(char** screen) {
@@ -52,31 +71,40 @@ void BattleBoard::draw(char** screen) {
 		for (int x = 0; x < columns; x++) {
 			baseY = offY + 3 * y + 2;
 			baseX = offX + 10 * x + 5;
-			if (board[y][x] == 0) {
-				if (y == 0) {
-					screen[baseY - 3][baseX - 1] = ' ';
-					screen[baseY - 3][baseX] = ' ';
-					screen[baseY - 3][baseX + 1] = ' ';
+			if (y == 0) {
+				screen[baseY - 3][baseX - 4] = ' ';
+				screen[baseY - 3][baseX - 3] = ' ';
+				screen[baseY - 3][baseX - 2] = ' ';
+				screen[baseY - 3][baseX - 1] = ' ';
+				screen[baseY - 3][baseX] = ' ';
+				screen[baseY - 3][baseX + 1] = ' ';
+				screen[baseY - 3][baseX + 2] = ' ';
+				screen[baseY - 3][baseX + 3] = ' ';
+				screen[baseY - 3][baseX + 4] = ' ';
+			}
+			for (int i = 0; i < 2; i++) {
+				screen[baseY - i][baseX - 4] = ' ';
+				screen[baseY - i][baseX - 3] = ' ';
+				screen[baseY - i][baseX - 2] = ' ';
+				screen[baseY - i][baseX - 1] = ' ';
+				screen[baseY - i][baseX] = ' ';
+				screen[baseY - i][baseX + 1] = ' ';
+				screen[baseY - i][baseX + 2] = ' ';
+				screen[baseY - i][baseX + 3] = ' ';
+				screen[baseY - i][baseX + 4] = ' ';
+			}
+
+			if (board[y][x] != 0) {
+				if (board[y][x] == 1) {
+					player.drawOnScreen(screen, baseY, baseX);
 				}
-				screen[baseY - 1][baseX - 2] = ' ';
-				screen[baseY - 1][baseX - 1] = ' ';
-				screen[baseY - 1][baseX] = ' ';
-				screen[baseY - 1][baseX + 1] = ' ';
-				screen[baseY - 1][baseX + 2] = ' ';
-				screen[baseY - 1][baseX + 3] = ' ';
-				screen[baseY][baseX - 1] = ' ';
-				screen[baseY][baseX] = ' ';
-				screen[baseY][baseX + 1] = ' ';
+				else if (board[y][x] <= 7) {
+					enemy.drawOnScreen(screen, baseY, baseX);
+				}
+				else {
+					npc.drawOnScreen(screen, baseY, baseX);
+				}
 			}
-			else if (board[y][x] == 1) {
-				player.drawOnScreen(screen, baseY, baseX);
-			}
-			else if (board[y][x] <= 7) {
-				enemy.drawOnScreen(screen, baseY, baseX);
-			}
-			else {
-				npc.drawOnScreen(screen, baseY, baseX);
-			}		
 		}
 	}
 }

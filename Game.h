@@ -3,6 +3,7 @@
 #include "MainUI.h"
 #include "MainMenu.h"
 #include "BattleBoard.h"
+#include "GameOverMenu.h"
 
 #include <Windows.h>
 
@@ -51,6 +52,7 @@ private:
     MainMenu mainMenu;
     BattleBoard** battle;
     BattleBoard* talkNpc;
+    GameOverMenu gomenu;
 
     void cleanScreen(int a);
     void changeGameState(GameState newState);

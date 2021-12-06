@@ -5,12 +5,18 @@ class BattleObject
 public:
 	BattleObject(int typeOfObject, int battleX, int battleY, int hp, int atk, int def, int numchars);
 	~BattleObject();
-	void drawOnBoard(int** battleBoard, int boardRows, int boardColumns);
+	bool drawOnBoard(int** battleBoard, int boardRows, int boardColumns);
 	void drawOnScreen(char** screen, int baseY, int baseX);
 	void update();
 
+	int typeOfObject;
 	//Stats
 	int hp, atk, def;
+	//State
+	bool isAttacking;
+	//Coordinates
+	int battleX;
+	int battleY;
 
 protected:
 	enum class Direction {
@@ -22,9 +28,6 @@ protected:
 
 	void move(Direction direction);
 
-	int typeOfObject;
-	int battleX;
-	int battleY;
 	int lastBattleX;
 	int lastBattleY;
 
@@ -32,5 +35,10 @@ protected:
 	int numChars;
 	int** charPos;
 	char* chars;
+
+	//Atack
+	void attack();
+
+	int lastFrame;
 
 };

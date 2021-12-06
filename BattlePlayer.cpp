@@ -24,11 +24,17 @@ void BattlePlayer::handleInput() {
 			move(Direction::LEFT);
 			lastAction = Action::MV_LEFT;
 		}
+		else {
+			lastAction = Action::NOTHING;
+		}
 	}
 	else if (GetAsyncKeyState('D') & 0x8000) {
 		if (lastAction != Action::MV_RIGHT) {
 			move(Direction::RIGHT);
 			lastAction = Action::MV_RIGHT;
+		}
+		else {
+			lastAction = Action::NOTHING;
 		}
 	}
 	else if (GetAsyncKeyState('W') & 0x8000) {
@@ -36,11 +42,17 @@ void BattlePlayer::handleInput() {
 			move(Direction::UP);
 			lastAction = Action::MV_UP;
 		}
+		else {
+			lastAction = Action::NOTHING;
+		}
 	}
 	else if (GetAsyncKeyState('S') & 0x8000) {
 		if (lastAction != Action::MV_DOWN) {
 			move(Direction::DOWN);
 			lastAction = Action::MV_DOWN;
+		}
+		else {
+			lastAction = Action::NOTHING;
 		}
 	}
 	else if (GetAsyncKeyState('J') & 0x8000) {
@@ -48,10 +60,16 @@ void BattlePlayer::handleInput() {
 			attack();
 			lastAction = Action::PRESSED_J;
 		}
+		else {
+			lastAction = Action::NOTHING;
+		}
 	}
 	else if (GetAsyncKeyState('K') & 0x8000) {
 		if (lastAction != Action::PRESSED_K) {
 			lastAction = Action::PRESSED_K;
+		}
+		else {
+			lastAction = Action::NOTHING;
 		}
 	}
 	else {
@@ -59,12 +77,12 @@ void BattlePlayer::handleInput() {
 	}
 }
 
-void BattlePlayer::update() {
+void BattlePlayer::update(int currentFrame) {
 	lastBattleX = battleX;
 	lastBattleY = battleY;
 	handleInput();
 	if (lastAction == Action::PRESSED_J) {
-		chars[0] = '.';
+		chars[0] = '_';
 		chars[2] = char(196);
 		chars[3] = char(196);
 		chars[4] = '\\';
@@ -72,6 +90,19 @@ void BattlePlayer::update() {
 		charPos[0][1] = 1;
 		charPos[2][1] = 2;
 		charPos[3][1] = 3;
+		lastFrame = currentFrame;
+	}
+	else if (lastFrame + 5) {
+		chars[0] = '|';
+		chars[2] = char(197);
+		chars[3] = '/';
+		chars[4] = '|';
+		chars[5] = '\\';
+		charPos[0][1] = -2;
+		charPos[2][1] = -2;
+		charPos[3][1] = -1;
+		//lastFrame = currentFrame;
+		isAttacking = false;
 	}
 }
 
@@ -86,8 +117,4 @@ void BattlePlayer::drawOnBoard(int** battleBoard, int boardRows, int boardColumn
 		battleY = lastBattleY;
 	}
 	battleBoard[battleY][battleX] = 1;
-}
-
-void BattlePlayer::attack() {
-
 }

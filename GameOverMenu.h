@@ -1,10 +1,11 @@
 #pragma once
+
 #include "Menu.h"
-class MainMenu :
+class GameOverMenu :
     public Menu
 {
 public:
-    MainMenu();
+    GameOverMenu();
 
     void draw(char** screen);
 };
